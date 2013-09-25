@@ -1,4 +1,4 @@
-package com.example.socketclient;
+/*package com.example.socketclient;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
 /**
  * Created by franqy on 24.09.13.
  */
-class connecting extends AsyncTask<String, Void, PrintWriter> {
+/*class connecting extends AsyncTask<String, Void, PrintWriter> {
     public AsyncResponse delegate=null;
 
 Socket socket;
@@ -102,4 +102,4 @@ Socket socket;
     protected void onPostExecute(Integer result) {
         delegate.processFinish(result);
     }
-}
+}*/
