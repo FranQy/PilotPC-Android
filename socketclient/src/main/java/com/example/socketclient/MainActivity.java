@@ -2,18 +2,17 @@ package com.example.socketclient;
 
 
 
-import java.io.BufferedWriter;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+
 import java.io.PrintWriter;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import java.net.UnknownHostException;
-import java.util.concurrent.ExecutionException;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,7 +26,7 @@ import android.content.Intent;
 import android.net.wifi.SupplicantState;
 
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -41,13 +40,13 @@ import android.widget.TextView;
 
 
 @SuppressWarnings("ALL")
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AsyncResponse {
 
     private Socket socket;
     Thread mojThread;
     Thread pilotThread;
     Button   menu;
-    PrintWriter out;
+
     Context kontext;
     TextView blad;
 
@@ -55,7 +54,7 @@ public class MainActivity extends Activity {
 
    public fileOperation nameFile;
 
-
+    connecting myAsync = new connecting();
 
 
    // private ViewFlipper vf;
@@ -66,6 +65,7 @@ public class MainActivity extends Activity {
 
     AlertDialog alertDialog;
     InetSocketAddress asddd;
+    PrintWriter out;
 
 
     String servername= "";
@@ -75,6 +75,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot_layout);
        //vf=(ViewFlipper)findViewById(R.id.ViewFlipper01);
+
+        myAsync.delegate = this;
 
 nameFile = new fileOperation();
         socket = new Socket();
@@ -150,7 +152,22 @@ nameFile = new fileOperation();
         nameFile.read();
 
 
+blad.setText("ad");
+    }
 
+
+    public void processFinish(PrintWriter output){
+        //this you will received result fired from async class of onPostExecute(result) method.
+
+        blad.setText("wygrałeś internety :D");
+        Log.d("async", "end1");
+    }
+
+    public void processFinish(int output){
+        //this you will received result fired from async class of onPostExecute(result) method.
+
+        blad.setText("przegrałeś internety :D");
+        Log.d("async", "end1");
     }
 
 
@@ -570,15 +587,17 @@ nameFile = new fileOperation();
                 Log.d("FILE", servername);
 
 
-            connecting myAsync = new connecting();
-
-            if(pilotThread.isAlive())
-                pilotThread.destroy();
-
-            pilotThread = new Thread(new Pilot());
 
 
-            try {
+            //if(pilotThread.isAlive())
+               // pilotThread.destroy();
+            Log.d("reasd", "pilotThreadStop");
+
+           // pilotThread = new Thread(new Pilot());
+            Log.d("reasd", "pilotThreadMake");
+            myAsync.execute(servername);
+            Log.d("reasd", "Myasync start");
+           /* try {
                 if(myAsync.execute(servername).get() == 1)
                 {
                     pilotThread.start();
@@ -587,7 +606,7 @@ nameFile = new fileOperation();
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
-            }
+            }*/
 
 
         }

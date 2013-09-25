@@ -1,11 +1,11 @@
-/*package com.example.socketclient;
+package com.example.socketclient;
+
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -14,9 +14,16 @@ import java.net.UnknownHostException;
 
 /**
  * Created by franqy on 24.09.13.
+ *
+ * Connecting to server program on PC
  */
-/*class connecting extends AsyncTask<String, Void, PrintWriter> {
-    public AsyncResponse delegate=null;
+
+
+class connecting extends AsyncTask<String, Void, Void> {
+
+   public AsyncResponse delegate=null;
+
+    int error= -1;
 
 Socket socket;
     InetSocketAddress asddd;
@@ -25,12 +32,29 @@ Socket socket;
 
 
     @Override
-    protected Integer doInBackground(String... Strings) {
+    protected void onPostExecute(Void result) {
+        if(error == -1)
+        {
+            delegate.processFinish(out);
+        }
+        else
+        {
+            delegate.processFinish(1);
+        }
+        Log.d("async", "end");
+    }
+
+    protected Void doInBackground(String... Strings) {
 
         String servername = Strings[0];
+        socket = new Socket();
+
+
+        Log.d("async", servername);
 
         if(socket.isConnected())
         {
+            Log.d("async", "socket test");
             try {
                 socket.getOutputStream().close();
                 socket.getInputStream().close();
@@ -54,7 +78,8 @@ Socket socket;
                 socket = new Socket();
                 Log.e("Myad strt", "d");
 
-                socket.connect(asddd);
+                socket.connect(asddd, 1000);
+
 
                 Log.e("MyThread strt", "adasd34");
 
@@ -71,7 +96,7 @@ Socket socket;
 
                     Log.e("MyThread strt", "adasd1");
                     // pilotThread.start();
-                    return 1;
+
                 }
                 //Close connection
                 // socket.close();
@@ -92,14 +117,16 @@ Socket socket;
         }
         else
         {
-
+            // TO DO
+            //error sending, etc
+            error = 1;
             // DialogFragment dialasd = new hostNameDialog();
             // dialasd.show(getFragmentManager(), "asd");
         }
-        return 0;
+        Log.d("async", "stop");
+        return null;
     }
 
-    protected void onPostExecute(Integer result) {
-        delegate.processFinish(result);
-    }
-}*/
+
+}
+
