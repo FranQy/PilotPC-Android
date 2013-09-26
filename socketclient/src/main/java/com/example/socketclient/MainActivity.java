@@ -5,12 +5,12 @@ package com.example.socketclient;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
+
 
 import java.io.PrintWriter;
 
 import java.net.InetSocketAddress;
-import java.net.Socket;
+
 
 
 
@@ -42,7 +42,7 @@ import android.widget.TextView;
 @SuppressWarnings("ALL")
 public class MainActivity extends Activity implements AsyncResponse {
 
-    private Socket socket;
+
     Thread mojThread;
     Thread pilotThread;
     Button   menu;
@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements AsyncResponse {
 
    public fileOperation nameFile;
 
-    connecting myAsync = new connecting();
+    connecting myAsync;
 
 
    // private ViewFlipper vf;
@@ -76,10 +76,11 @@ public class MainActivity extends Activity implements AsyncResponse {
         setContentView(R.layout.pilot_layout);
        //vf=(ViewFlipper)findViewById(R.id.ViewFlipper01);
 
-        myAsync.delegate = this;
+      test1();
 
 nameFile = new fileOperation();
-        socket = new Socket();
+
+
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
 
@@ -144,15 +145,24 @@ nameFile = new fileOperation();
 
 
 
-         mojThread = new Thread(new ClientThread());
-       pilotThread = new Thread(new Pilot());
+       //  mojThread = new Thread(new ClientThread());
 
 
+        pilotThread = new Thread(new Pilot());
        // pilotThread.start();
         nameFile.read();
 
 
 blad.setText("ad");
+    }
+
+    public void test1()
+    {
+        myAsync = new connecting();
+
+        myAsync.delegate = this;
+
+
     }
 
 
@@ -161,6 +171,17 @@ blad.setText("ad");
 
         blad.setText("wygrałeś internety :D");
         Log.d("async", "end1");
+out = null;
+        out = output;
+
+        if(pilotThread.isAlive())
+        {
+            pilotThread.interrupt();
+        }
+        pilotThread = new Thread(new Pilot());
+        pilotThread.start();
+
+     //   myAsync.cancel();
     }
 
     public void processFinish(int output){
@@ -175,6 +196,13 @@ switch (output)
     {
         blad.setText("wlacz pc");
     }
+    if(pilotThread.isAlive())
+    {
+        pilotThread.interrupt();
+    }
+    myAsync.closeSocket();
+      //  out.close();
+        out = null;
 }
 
         Log.d("async", "end2");
@@ -413,7 +441,7 @@ switch (output)
 
         super.onBackPressed();
 
-      myAsync.cancel();
+      myAsync.closeSocket();
 
     }
 
@@ -422,7 +450,7 @@ switch (output)
 
 
 
-    class ClientThread implements Runnable {
+    /*class ClientThread implements Runnable {
 
 
 
@@ -434,7 +462,7 @@ switch (output)
 
 
     }
-}
+}*/
 
 
 
@@ -594,18 +622,12 @@ switch (output)
 
            // pilotThread = new Thread(new Pilot());
             Log.d("reasd", "pilotThreadMake");
-            myAsync.execute(servername);
+
+test1();
+
             Log.d("reasd", "Myasync start");
-           /* try {
-                if(myAsync.execute(servername).get() == 1)
-                {
-                    pilotThread.start();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }*/
+            myAsync.execute(servername);
+
 
 
         }

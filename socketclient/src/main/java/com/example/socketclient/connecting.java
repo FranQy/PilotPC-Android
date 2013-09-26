@@ -31,7 +31,7 @@ Socket socket;
     private static final int SERVERPORT = 12345;
 
 
-    void cancel()
+    void closeSocket()
     {
         if(socket!=null)
         {
@@ -40,6 +40,7 @@ Socket socket;
                 socket.getOutputStream().close();
                 socket.getInputStream().close();
                 socket.close();
+                out.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,6 +60,8 @@ Socket socket;
         {
             delegate.processFinish(error);
             Log.d("async", "end2");
+            closeSocket();
+
 
         }
 
@@ -124,7 +127,8 @@ Socket socket;
                 }
                 else
                 {
-
+                    error = 1;
+                    Log.e("MyThread strt", "error 1");
                 }
                 //Close connection
                 // socket.close();
