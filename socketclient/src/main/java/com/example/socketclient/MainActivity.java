@@ -165,9 +165,19 @@ blad.setText("ad");
 
     public void processFinish(int output){
         //this you will received result fired from async class of onPostExecute(result) method.
+switch (output)
+{
+    case 1:
+    {
+        blad.setText("wlacz sprogram na pc");
+    }
+    case 2:
+    {
+        blad.setText("wlacz pc");
+    }
+}
 
-        blad.setText("przegrałeś internety :D");
-        Log.d("async", "end1");
+        Log.d("async", "end2");
     }
 
 
@@ -403,18 +413,7 @@ blad.setText("ad");
 
         super.onBackPressed();
 
-        if(socket!=null)
-        {
-            try {
-
-                socket.getOutputStream().close();
-                socket.getInputStream().close();
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            socket = null;
-        }
+      myAsync.cancel();
 
     }
 

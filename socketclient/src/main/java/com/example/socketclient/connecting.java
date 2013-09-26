@@ -23,7 +23,7 @@ class connecting extends AsyncTask<String, Void, Void> {
 
    public AsyncResponse delegate=null;
 
-    int error= -1;
+    int error=0;
 
 Socket socket;
     InetSocketAddress asddd;
@@ -31,17 +31,37 @@ Socket socket;
     private static final int SERVERPORT = 12345;
 
 
+    void cancel()
+    {
+        if(socket!=null)
+        {
+            try {
+
+                socket.getOutputStream().close();
+                socket.getInputStream().close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            socket = null;
+        }
+    }
+
+
     @Override
     protected void onPostExecute(Void result) {
-        if(error == -1)
+        if(error == 0)
         {
             delegate.processFinish(out);
+            Log.d("async", "end1");
         }
         else
         {
-            delegate.processFinish(1);
+            delegate.processFinish(error);
+            Log.d("async", "end2");
+
         }
-        Log.d("async", "end");
+
     }
 
     protected Void doInBackground(String... Strings) {
@@ -89,13 +109,21 @@ Socket socket;
                             new OutputStreamWriter(socket.getOutputStream())),
                             true);
 
-
+                if(out.checkError())
+                {
+                    error = 1;
+                    Log.e("MyThread strt", "error 1");
+                }
 
 
 
 
                     Log.e("MyThread strt", "adasd1");
                     // pilotThread.start();
+
+                }
+                else
+                {
 
                 }
                 //Close connection
@@ -119,7 +147,7 @@ Socket socket;
         {
             // TO DO
             //error sending, etc
-            error = 1;
+            error = 2;
             // DialogFragment dialasd = new hostNameDialog();
             // dialasd.show(getFragmentManager(), "asd");
         }
