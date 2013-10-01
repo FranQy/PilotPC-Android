@@ -190,20 +190,31 @@ switch (output)
 {
     case 1:
     {
-        blad.setText("wlacz sprogram na pc");
+        blad.setText("blad polaczenia");
+        break;
     }
     case 2:
     {
-        blad.setText("wlacz pc");
+        blad.setText("wlacz program-server");
+        break;
     }
+    case 3:
+    {
+        blad.setText("wlacz PC");
+        break;
+    }
+
+
+}
+
     if(pilotThread.isAlive())
     {
         pilotThread.interrupt();
     }
     myAsync.closeSocket();
-      //  out.close();
+
         out = null;
-}
+
 
         Log.d("async", "end2");
     }

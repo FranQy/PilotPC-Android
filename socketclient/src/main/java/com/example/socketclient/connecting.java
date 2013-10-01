@@ -19,14 +19,14 @@ import java.net.UnknownHostException;
  */
 
 
-class connecting extends AsyncTask<String, Void, Void> {
+class connecting extends AsyncTask<String, Void, Integer> {
 
    public AsyncResponse delegate=null;
 
-    int error=0;
 
-Socket socket;
-    InetSocketAddress asddd;
+
+    Socket socket;
+    InetSocketAddress SocketAdrr;
     PrintWriter out;
     private static final int SERVERPORT = 12345;
 
@@ -50,24 +50,10 @@ Socket socket;
 
 
     @Override
-    protected void onPostExecute(Void result) {
-        if(error == 0)
-        {
-            delegate.processFinish(out);
-            Log.d("async", "end1");
-        }
-        else
-        {
-            delegate.processFinish(error);
-            Log.d("async", "end2");
-            closeSocket();
 
 
-        }
-
-    }
-
-    protected Void doInBackground(String... Strings) {
+    protected Integer doInBackground(String... Strings) {
+        int error = 0;
 
         String servername = Strings[0];
         socket = new Socket();
@@ -77,7 +63,7 @@ Socket socket;
 
         if(socket.isConnected())
         {
-            Log.d("async", "socket test");
+
             try {
                 socket.getOutputStream().close();
                 socket.getInputStream().close();
@@ -90,45 +76,57 @@ Socket socket;
 
 
 
-        Log.d("MyThread strt", "adasd");
 
 
-        asddd = new InetSocketAddress(servername, SERVERPORT);
 
-        if(!asddd.isUnresolved())
+        SocketAdrr = new InetSocketAddress(servername, SERVERPORT);
+
+        if(!SocketAdrr.isUnresolved())
         {
+            socket = new Socket();
             try {
-                socket = new Socket();
-                Log.e("Myad strt", "d");
-
-                socket.connect(asddd, 1000);
 
 
-                Log.e("MyThread strt", "adasd34");
+
+                socket.connect(SocketAdrr, 1000);
+
+            } catch (UnknownHostException e1) {
+                // e1.printStackTrace();
+            } catch (IOException e1) {
+                //  e1.printStackTrace();
+            }
+
+
 
                 if(socket.isConnected())
                 {
-                    out = new PrintWriter(new BufferedWriter(
-                            new OutputStreamWriter(socket.getOutputStream())),
-                            true);
+                    try {
+                        out = new PrintWriter(new BufferedWriter(
+                                new OutputStreamWriter(socket.getOutputStream())),
+                                true);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                if(out.checkError())
-                {
+
+                    if(out.checkError())
+                    {
                     error = 1;
-                    Log.e("MyThread strt", "error 1");
-                }
+                        Log.d("async", "error 1");
+                    }
 
 
 
 
-                    Log.e("MyThread strt", "adasd1");
-                    // pilotThread.start();
+
+
+
 
                 }
                 else
                 {
-                    error = 1;
-                    Log.e("MyThread strt", "error 1");
+                    error = 2;
+                    Log.d("async", "error 2");
                 }
                 //Close connection
                 // socket.close();
@@ -136,11 +134,7 @@ Socket socket;
 
 
 
-            } catch (UnknownHostException e1) {
-                e1.printStackTrace();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+
 
 
 
@@ -151,14 +145,32 @@ Socket socket;
         {
             // TO DO
             //error sending, etc
-            error = 2;
+            error = 3;
+            Log.d("async", "error 3");
             // DialogFragment dialasd = new hostNameDialog();
             // dialasd.show(getFragmentManager(), "asd");
         }
-        Log.d("async", "stop");
-        return null;
+        Log.d("async", "done");
+
+        return error;
     }
 
+    protected void onPostExecute(Integer result) {
+        if(result==0)
+        {
+            delegate.processFinish(out);
+            Log.d("async", "ok, connected, send PrintWriter");
+        }
+        else
+        {
+            delegate.processFinish(result);
+            Log.d("asynca", String.valueOf(result));
+            closeSocket();
+
+
+        }
+
+    }
 
 }
 
