@@ -178,4 +178,12 @@
             android:id="@+id/buttonMenu"
             android:layout_gravity="right|center_vertical"/>
 
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imagePrzyciski"
+            android:layout_gravity="center"
+            android:src="@drawable/przyciski"
+            android:alpha="0"/>
+
 </FrameLayout>

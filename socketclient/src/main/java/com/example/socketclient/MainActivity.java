@@ -23,6 +23,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.wifi.SupplicantState;
 
 import android.net.wifi.WifiManager;
@@ -32,10 +37,12 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -46,10 +53,12 @@ public class MainActivity extends Activity implements AsyncResponse {
     Thread mojThread;
     Thread pilotThread;
     Button   menu;
+    ImageView odswierz;
 
     Context kontext;
     TextView blad;
 
+    ImageView przyciski;
     WifiManager mainWifi;
 
    public fileOperation nameFile;
@@ -83,6 +92,203 @@ nameFile = new fileOperation();
 
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
+
+        /*
+        Tworzenie przyciskow z imageView
+         */
+
+        przyciski = (ImageView)  findViewById(R.id.imagePrzyciski);
+
+      przyciski.setOnTouchListener(new View.OnTouchListener() {
+          @Override
+          public boolean onTouch(View view, MotionEvent motionEvent) {
+              float X, Y;
+             X=motionEvent.getX();
+              Y=motionEvent.getY();
+
+              float[] XY = new float[] {X, Y};
+
+
+              Matrix invertMatrix = new Matrix();
+              ((ImageView)view).getImageMatrix().invert(invertMatrix);
+
+              invertMatrix.mapPoints(XY);
+
+              int x = Integer.valueOf((int)XY[0]);
+              int y = Integer.valueOf((int)XY[1]);
+
+              Drawable imgDrawable = ((ImageView)view).getDrawable();
+              Bitmap bitmap = ((BitmapDrawable)imgDrawable).getBitmap();
+
+
+
+              int touchedRGB = bitmap.getPixel(x, y);
+              blad.setText(String.valueOf(touchedRGB));
+
+
+
+              switch(touchedRGB)
+              {
+                  case -39424:
+                  {
+                      blad.setText("radio");
+                      break;
+                  }
+                  case -256:
+                  {
+                      blad.setText("glosniej");
+                      break;
+                  }
+                  case -16733697:
+                  {
+                      blad.setText("ciszej");
+                      break;
+                  }
+                  case -5636268:
+                  {
+                      blad.setText("wycisz");
+                      break;
+                  }
+                  case -13312:
+                  {
+                      blad.setText("P/P");
+                      break;
+                  }
+                  case -11189248:
+                  {
+                      blad.setText("perw");
+                      break;
+                  }
+                  case -6528:
+                  {
+                      blad.setText("next");
+                      break;
+                  }
+                  case -65536:
+                  {
+                      blad.setText("off");
+                      break;
+                  }
+                  case -13142:
+                  {
+                      blad.setText("tv");
+                      break;
+                  }
+                  case -32982:
+                  {
+                      blad.setText("movie");
+                      break;
+                  }
+                  case -11522794:
+                  {
+                      blad.setText("rec");
+                      break;
+                  }
+                  case -2912929:
+                  {
+                      blad.setText("stop");
+                      break;
+                  }
+                  case -16744448:
+                  {
+                      blad.setText("red");
+                      break;
+                  }
+                  case -65281:
+                  {
+                      blad.setText("green");
+                      break;
+                  }
+                  case -11206656:
+                  {
+                      blad.setText("yellow");
+                      break;
+                  }
+                  case -2883584:
+                  {
+                      blad.setText("blue");
+                      break;
+                  }
+                  case -43691:
+                  {
+                      blad.setText("DVR");
+                      break;
+                  }
+                  case -32640:
+                  {
+                      blad.setText("GUIDE");
+                      break;
+                  }
+                  case -21846:
+                  {
+                      blad.setText("info");
+                      break;
+                  }
+                  case -5467245:
+                  {
+                      blad.setText("exit");
+                      break;
+                  }
+                  case -14149877:
+                  {
+                      blad.setText("menu");
+                      break;
+                  }
+                  case -58368:
+                  {
+                      blad.setText("ch+");
+                      break;
+                  }
+                  case -11206743:
+                  {
+                      blad.setText("ch-");
+                      break;
+                  }
+                  case -51200:
+                  {
+                      blad.setText("return");
+                      break;
+                  }
+                  case -16711681:
+                  {
+                      blad.setText("OK");
+                      break;
+                  }
+                  case -1900772:
+                  {
+                      blad.setText("up");
+                      break;
+                  }
+                  case -16777089:
+                  {
+                      blad.setText("down");
+                      break;
+                  }
+                  case -16744449:
+                  {
+                      blad.setText("right");
+                      break;
+                  }
+                  case -16776961:
+                  {
+                      blad.setText("left");
+                      break;
+                  }
+
+                  case -1:
+                  {
+                      break;
+                  }
+              }
+
+
+            // blad.setText(String.valueOf(touchedRGB));
+
+
+
+              return false;
+          }
+      });
 
 
         blad = (TextView) findViewById(R.id.textView1);
@@ -121,26 +327,16 @@ nameFile = new fileOperation();
 
 
 
-       /* pOdswierz.setText("sproboj jeszcze raz");
 
-        pOdswierz.setOnClickListener(new View.OnClickListener() {
+        odswierz = (ImageView) findViewById(R.id.imageView2);
+
+        odswierz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = getBaseContext().getPackageManager()
-                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                System.exit(0);
-
-
-
+                nameFile.read();
 
             }
-
-
-        });*/
-
+        });
 
 
 
@@ -169,8 +365,8 @@ blad.setText("ad");
     public void processFinish(PrintWriter output){
         //this you will received result fired from async class of onPostExecute(result) method.
 
-        blad.setText("wygrałeś internety :D");
-        Log.d("async", "end1");
+        blad.setText("połączono");
+        Log.d("async", "polaczono");
 out = null;
         out = output;
 
