@@ -5,127 +5,6 @@
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="62dp"
-            android:layout_height="65dp"
-            android:text="New Button"
-            android:id="@+id/buttonCiszej"
-            android:layout_gravity="left|bottom"
-            android:layout_marginBottom="65dp"
-            android:layout_marginLeft="31dp"
-            android:enabled="true"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="62dp"
-            android:layout_height="65dp"
-            android:text="New Button"
-            android:id="@+id/buttonGlosniej"
-            android:layout_gravity="left|bottom"
-            android:layout_marginBottom="146dp"
-            android:layout_marginLeft="31dp"
-            android:enabled="true"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonWycisz"
-            android:layout_gravity="left|bottom"
-            android:layout_marginLeft="31dp"
-            android:layout_marginBottom="10dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:text="New Button"
-            android:id="@+id/buttonOFF"
-            android:layout_gravity="left|top"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="8dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="103dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonRadio"
-            android:layout_gravity="left|top"
-            android:layout_marginTop="55dp"
-            android:layout_marginLeft="33dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonXBMC"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="55dp"
-            android:layout_marginLeft="-2dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="63dp"
-            android:layout_height="100dp"
-            android:text="New Button"
-            android:id="@+id/buttonPlay"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="120dp"
-            android:layout_marginLeft="-3dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonPerv"
-            android:layout_gravity="left|top"
-            android:layout_marginLeft="33dp"
-            android:layout_marginTop="120dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonNext"
-            android:layout_gravity="right|top"
-            android:layout_marginTop="120dp"
-            android:layout_marginRight="38dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonStop"
-            android:layout_gravity="right|top"
-            android:layout_marginRight="38dp"
-            android:layout_marginTop="175dp"
-            android:alpha="0"/>
-
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/buttonMusic"
-            android:layout_gravity="right|top"
-            android:layout_marginTop="55dp"
-            android:layout_marginRight="40dp"
-            android:alpha="0"/>
-
     <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -170,14 +49,6 @@
             android:textSize="30dp"
             android:visibility="invisible"/>
 
-    <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="118dp"
-            android:layout_height="wrap_content"
-            android:text="menu"
-            android:id="@+id/buttonMenu"
-            android:layout_gravity="right|center_vertical"/>
-
     <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -185,5 +56,55 @@
             android:layout_gravity="center"
             android:src="@drawable/przyciski"
             android:alpha="0"/>
+
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageInfo"
+            android:layout_gravity="center"
+            android:src="@drawable/info"
+            android:visibility="invisible"/>
+
+    <SlidingDrawer
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:content="@+id/content"
+            android:handle="@+id/handle"
+            android:id="@+id/slidingDrawer"
+            android:layout_gravity="center_horizontal|bottom"
+            >
+
+        <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:background="@drawable/baloon"
+                >
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="         ukryj           "
+                    android:id="@+id/buttonUkryj"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"/>
+
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="zmien komputer"
+                    android:id="@+id/buttonNameChange"/>
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/handle"
+                android:layout_width="wrap_content"
+                android:layout_height="0px"
+                android:text="Handle"
+                android:visibility="invisible"
+                android:height="1px"
+                android:focusableInTouchMode="false"/>
+    </SlidingDrawer>
 
 </FrameLayout>
