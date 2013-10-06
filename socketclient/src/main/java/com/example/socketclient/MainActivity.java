@@ -29,30 +29,23 @@ import android.widget.ImageView;
 public class MainActivity extends Activity implements AsyncResponse {
 
 
-   boolean klawisze = false, odswierzPrzycisk = false;
-    Thread mojThread;
+  // boolean klawisze = false, odswierzPrzycisk = false;
+   // Thread mojThread;
     //Thread pilotThread, pilotThread1;
-    ImageView odswierz;
+   // ImageView odswierz;
 
-    Context kontext;
+  //  Context kontext;
    // TextView blad;
 
-    ImageView przyciski;
+  //  ImageView przyciski;
     WifiManager mainWifi;
 
-   public fileOperation nameFile;
-
-    connecting myAsync;
-
-
-   // private ViewFlipper vf;
-
-    //private float oldTouchValue;
+   //public fileOperation nameFile;
 
 
 
     AlertDialog alertDialog;
-    InetSocketAddress asddd;
+ //   InetSocketAddress asddd;
     PrintWriter out;
     pilot pilot;
 
@@ -64,12 +57,10 @@ public class MainActivity extends Activity implements AsyncResponse {
         setContentView(R.layout.pilot_layout);
        //vf=(ViewFlipper)findViewById(R.id.ViewFlipper01);
 
-      test1();
         pilot = new pilot(this);
 
 
 
-nameFile = new fileOperation();
 
 
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -89,45 +80,20 @@ nameFile = new fileOperation();
        }
 
 
-     //   DialogFragment dialasd = new FireMissilesDialogFragment();
-       // dialasd.show(getFragmentManager(), "asd");
 
+        //odswierz = (ImageView) findViewById(R.id.imageView2);
 
-
-
-
-        odswierz = (ImageView) findViewById(R.id.imageView2);
-
-        odswierz.setOnClickListener(new View.OnClickListener() {
+       /* odswierz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nameFile.read();
 
             }
-        });
-
-
-
-
-       //  mojThread = new Thread(new ClientThread());
-
-
-
-       // pilotThread.start();
-        nameFile.read();
-
-
-//blad.setText("ad");
-    }
-
-    public void test1()
-    {
-        myAsync = new connecting();
-
-        myAsync.delegate = this;
+        });*/
 
 
     }
+
 
 
     public void processFinish(PrintWriter output){
@@ -135,22 +101,20 @@ nameFile = new fileOperation();
 
       //  blad.setText("połączono");
         Log.d("async", "polaczono");
-out = null;
+        out = null;
         out = output;
 
-       // if(pilotThread.isAlive())
-       // {
-       //     pilotThread.interrupt();
-       // }
+
 
         pilot.przyciski1.givePrintWriter(out);
         pilot.przyciski1.klawisze=true;
-
+     //   pilot.blad.setText("asdads");
      //   myAsync.cancel();
     }
 
     public void processFinish(int output){
         //this you will received result fired from async class of onPostExecute(result) method.
+
 switch (output)
 {
     case 1:
@@ -166,20 +130,18 @@ switch (output)
     case 3:
     {
        // blad.setText("wlacz PC");
+
+
+
+      //  pilot.blad.setText("asdads");
         break;
     }
 
 
 }
-klawisze=false;
+//klawisze=false;
 
-   // if(pilotThread.isAlive())
-   // {
-      //  pilotThread.interrupt();
-    //}
         pilot.przyciski1.klawisze=false;
-
-    myAsync.closeSocket();
 
         out = null;
 
@@ -385,7 +347,7 @@ klawisze=false;
 
         super.onBackPressed();
 
-      myAsync.closeSocket();
+      //myAsync.closeSocket();
 
     }
 
@@ -414,70 +376,9 @@ klawisze=false;
 
 
 
-    public class fileOperation
-    {
-        public void read()
-        {
-            Log.d("M strt", "reading 0");
-            servername = "";
-
-            char buf[] = new char[512];
-
-            FileReader rdr;
-
-            try {
-                rdr = new FileReader("/sdcard/PilotTV/serverName.ptv");
-                int s = rdr.read(buf);
-                for(int k = 0; k < s; k++){
-                    servername+=buf[k];
-                    buf[k]='\0';
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
 
 
-
-                Log.d("FILE", servername);
-
-
-
-
-            //if(pilotThread.isAlive())
-               // pilotThread.destroy();
-            Log.d("reasd", "pilotThreadStop");
-
-           // pilotThread = new Thread(new Pilot());
-            Log.d("reasd", "pilotThreadMake");
-
-test1();
-
-            Log.d("reasd", "Myasync start");
-            myAsync.execute(servername);
-
-
-
-        }
-
-
-        public void write(String text)
-        {
-
-            FileWriter fWriter;
-            try{
-                fWriter = new FileWriter("/sdcard/PilotTV/serverName.ptv");
-                fWriter.write(text);
-                fWriter.flush();
-                fWriter.close();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-
-        }
-
-
-    }
 
 
 }

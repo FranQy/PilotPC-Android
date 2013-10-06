@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -27,21 +28,22 @@ public class pilot   {
 
     static przyciski przyciski1;
 
-
+    fileOperation file = new fileOperation();
 
    public pilot(Activity activity)
    {
-
-
     this.activity=activity;
 
-
-
-
        blad = (TextView) this.activity.findViewById(R.id.textView1);
+       file.read();
+
+
+
+
        blad.setText("pilot act");
 
        przyciski1 = new przyciski();
+
 
 
 
@@ -80,7 +82,7 @@ public class pilot   {
                         public void onClick(DialogInterface dialog, int id) {
                             Log.d("MyThread", "bla");
 
-                           // nameFile.write(((EditText) v.findViewById(R.id.kurwa)).getText().toString());
+                           file.write(((EditText) v.findViewById(R.id.kurwa)).getText().toString());
                             Log.d("M strt", "adasd bal");
                           //  nameFile.read();
                             // servername = ((EditText) v.findViewById(R.id.kurwa)).getText().toString();

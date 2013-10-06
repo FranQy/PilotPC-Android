@@ -21,49 +21,12 @@
             android:layout_gravity="center_horizontal|top"/>
 
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:layout_gravity="right|top"
-            android:src="@drawable/ic_launcher"/>
-
-    <ImageView
-            android:layout_width="221dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageView3"
-            android:layout_gravity="center_horizontal|top"
-            android:src="@drawable/baloon"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="3dp"
-            android:visibility="invisible"/>
-
-    <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textVieew"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="3dp"
-            android:textColor="#000000"
-            android:textSize="30dp"
-            android:visibility="invisible"/>
-
-    <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imagePrzyciski"
             android:layout_gravity="center"
             android:src="@drawable/przyciski"
             android:alpha="0"/>
-
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageInfo"
-            android:layout_gravity="center"
-            android:src="@drawable/info"
-            android:visibility="invisible"/>
 
     <SlidingDrawer
             android:layout_width="fill_parent"
@@ -106,5 +69,13 @@
                 android:height="1px"
                 android:focusableInTouchMode="false"/>
     </SlidingDrawer>
+
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageInfo"
+            android:layout_gravity="center"
+            android:src="@drawable/info"
+            android:visibility="invisible"/>
 
 </FrameLayout>

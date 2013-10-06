@@ -49,6 +49,8 @@ blad.setText("asd");
             public void onClick(View view) {
                 DialogFragment dialasd = new hostNameDialog();
                 dialasd.show(pilot.activity.getFragmentManager(), "asd");
+                sliding.animateClose();
+                click();
             }
         });
 
@@ -62,11 +64,10 @@ blad.setText("asd");
         infoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // if(infoImage.getVisibility()==1)
-              //  {
-                    infoImage.setVisibility(View.INVISIBLE);
 
-               //   }
+                    infoImage.setVisibility(View.INVISIBLE);
+                click();
+
             }
         });
 
@@ -86,7 +87,6 @@ blad.setText("asd");
 
                 przyciskia.getImageMatrix().invert(invertMatrix);
 
-                //((ImageView) view).getImageMatrix().invert(invertMatrix);
 
                 invertMatrix.mapPoints(XY);
 
@@ -97,19 +97,14 @@ blad.setText("asd");
                 assert imgDrawable != null;
                 Bitmap bitmap = ((BitmapDrawable)  imgDrawable).getBitmap();
 
-                //blad.setText(String.valueOf(bitmap.getDensity()));
+
 
                    blad.setText(String.valueOf(x));
 
 
                 if(x>0 && x<500)
                 ktoryPrzycisk(bitmap.getPixel(x, y));
-                // blad.setText(String.valueOf(touchedRGB));
 
-
-
-
-                // blad.setText(String.valueOf(touchedRGB));
 
 
                 return false;
@@ -125,13 +120,13 @@ void ktoryPrzycisk(int touchedRGB)
     if(touchedRGB == -14149877)
     {
         blad.setText("menu");
-
+        click();
         sliding.animateOpen();
 
     }
     else if(touchedRGB == -32640)
     {
-       click("GUIDE");
+       click();
         infoImage.setVisibility(View.VISIBLE);
     }
 
@@ -258,16 +253,20 @@ void ktoryPrzycisk(int touchedRGB)
     }
 }
 
-void givePrintWriter(PrintWriter out)
-{
-this.out = out;
-}
+    void givePrintWriter(PrintWriter out)
+    {
+    this.out = out;
+    }
 
     void click(String command){
+        out.println(command);
+        blad.setText(command);
+        click();
+    }
+    void click(){
         Vibrator v = (Vibrator) pilot.activity.getSystemService(Context.VIBRATOR_SERVICE);
         int VIBRATION_TIME = 80;
-        out.println(command);
         v.vibrate(VIBRATION_TIME);
-        blad.setText(command);
+
     }
 }
