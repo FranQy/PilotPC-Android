@@ -1,7 +1,11 @@
 package com.example.socketclient;
 
+
+
+import android.os.Environment;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
@@ -10,7 +14,12 @@ import java.io.FileWriter;
  * change serv name etc
  */
 public class fileOperation {
-    connecting myAsync= new connecting();
+    connecting myAsync;
+    public fileOperation()
+    {
+         myAsync= new connecting();
+    }
+
     public void read()
     {
 
@@ -22,7 +31,12 @@ public class fileOperation {
         FileReader rdr;
 
         try {
-            rdr = new FileReader("/sdcard/PilotTV/serverName.ptv");
+
+            rdr = new FileReader(String.valueOf(Environment.getExternalStorageDirectory() )+"/PilotTV/serverName.ptv");
+
+
+
+
             int s = rdr.read(buf);
             for(int k = 0; k < s; k++){
                 servername+=buf[k];
@@ -30,7 +44,11 @@ public class fileOperation {
             }
         } catch (Exception e) {
             e.printStackTrace();
+
+            pilot Pilot1 = new pilot();
+            Pilot1.showcos();
         }
+
 
 
 
@@ -58,10 +76,16 @@ lacz(servername);
 
     public void write(String text)
     {
-
+        File Direcotry = new File(String.valueOf(Environment.getExternalStorageDirectory() )+"/PilotTV/");
+        if(!Direcotry.exists())
+        {
+            //TODO: check result of mkdirs
+            Direcotry.mkdirs();
+        }
         FileWriter fWriter;
         try{
-            fWriter = new FileWriter("/sdcard/PilotTV/serverName.ptv");
+            fWriter = new FileWriter(String.valueOf(Environment.getExternalStorageDirectory() )+"/PilotTV/serverName.ptv");
+
             fWriter.write(text);
             fWriter.flush();
             fWriter.close();
@@ -69,7 +93,7 @@ lacz(servername);
             e.printStackTrace();
         }
 
-lacz(text);
+    lacz(text);
     }
 
     void lacz(String servname)
@@ -82,6 +106,11 @@ lacz(text);
 
         myAsync.delegate = main;
         myAsync.execute(servname);
+    }
+
+    void rozlacz()
+    {
+        myAsync.closeSocket();
     }
 
 

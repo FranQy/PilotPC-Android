@@ -1,7 +1,7 @@
 package com.example.socketclient;
 
 
-import android.app.DialogFragment;
+
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,10 +9,12 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
+
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 
@@ -25,11 +27,12 @@ import java.io.PrintWriter;
 public class przyciski extends pilot{
   //  public Activity activity;
     boolean klawisze = false;
-    ImageView przyciskia, infoImage;
+    ImageView przyciskia, infoImage, hand;
     SlidingDrawer sliding;
-    Button ukryj, menuButton;
 
-PrintWriter out;
+    PrintWriter out;
+
+
     public przyciski(){
 
 super();
@@ -41,25 +44,14 @@ blad.setText("asd");
         przyciskia = (ImageView) this.activity.findViewById(R.id.imagePrzyciski);
         infoImage =(ImageView) this.activity.findViewById(R.id.imageInfo);
         sliding = (SlidingDrawer) this.activity.findViewById(R.id.slidingDrawer);
-        ukryj = (Button) this.activity.findViewById(R.id.buttonUkryj);
-        menuButton = (Button) this.activity.findViewById(R.id.buttonNameChange);
+       // connectingSlidingMenu = (SlidingDrawer) this.activity.findViewById(R.id.slidingDrawer2);
+        //ukryj = (Button) this.activity.findViewById(R.id.buttonUkryj);
 
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment dialasd = new hostNameDialog();
-                dialasd.show(pilot.activity.getFragmentManager(), "asd");
-                sliding.animateClose();
-                click();
-            }
-        });
+        hand = (ImageView)this.activity.findViewById(R.id.handleImag);
+//testLay = (LinearLayout) this.activity.findViewById(R.id.linearLayout4);
 
-        ukryj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sliding.animateClose();
-            }
-        });
+
+
 
         infoImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +76,7 @@ blad.setText("asd");
 
 
                 Matrix invertMatrix = new Matrix();
-
+                //TODO: check Null pointer bla bla
                 przyciskia.getImageMatrix().invert(invertMatrix);
 
 
@@ -121,7 +113,14 @@ void ktoryPrzycisk(int touchedRGB)
     {
         blad.setText("menu");
         click();
+        hand.setVisibility(View.VISIBLE);
         sliding.animateOpen();
+
+     // menu men = new menu();
+       // men.cosaa();
+        menu men = new menu(this.activity);
+       // men.cosaa();
+
 
     }
     else if(touchedRGB == -32640)

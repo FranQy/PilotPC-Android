@@ -1,8 +1,9 @@
 package com.example.socketclient;
-import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.io.PrintWriter;
-import java.net.InetSocketAddress;
+
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,11 +18,10 @@ import android.os.Bundle;
 
 import android.provider.Settings;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 
 import android.view.View;
-
-import android.widget.ImageView;
 
 
 
@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements AsyncResponse {
     //Thread pilotThread, pilotThread1;
    // ImageView odswierz;
 
-  //  Context kontext;
+    Context kontext;
    // TextView blad;
 
   //  ImageView przyciski;
@@ -51,17 +51,57 @@ public class MainActivity extends Activity implements AsyncResponse {
 
     String servername= "";
 
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot_layout);
        //vf=(ViewFlipper)findViewById(R.id.ViewFlipper01);
 
-        pilot = new pilot(this);
+        //FrameLayout mojanim = (FrameLayout) findViewById(R.id)
+     //  Button mojanim = (Button) findViewById(R.id.buttonAim);
+    //    LinearLayout mojanim2 = (LinearLayout) findViewById(R.id.container);
+
+       /* AnimatorSet set = new AnimatorSet();
+
+
+       ObjectAnimator animation = ObjectAnimator.ofFloat(mojanim, "translationY", 0f, -1000f);
+        animation.setDuration(2000);
+        set.play(animation);
+        set.start();*/
 
 
 
 
+      // Animation logoMoveAnimation3 = AnimationUtils.loadAnimation(this, R.anim.animlay);
+      //  mojanim2.startAnimation(logoMoveAnimation3);
+
+
+       // Animation logoMoveAnimation = AnimationUtils.loadAnimation(this, R.anim.animlay);
+      //  mojanim.startAnimation(logoMoveAnimation);
+
+
+
+       // View newView = (View) findViewById(R.id)
+       pilot = new pilot(this);
+
+
+
+        /*buta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mContainerView.getChildCount()==0)
+                {
+              //  addItem();
+                }
+                else
+                {
+                    mContainerView.removeAllViews();
+                }
+            }
+        });*/
 
         mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
@@ -346,11 +386,21 @@ switch (output)
     {
 
         super.onBackPressed();
-
+pilot.file.rozlacz();
       //myAsync.closeSocket();
+
+
 
     }
 
+
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            pilot.przyciski1.sliding.animateOpen();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 
 
 

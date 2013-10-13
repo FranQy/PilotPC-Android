@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,13 +29,14 @@ public class pilot   {
 
     static przyciski przyciski1;
 
-    fileOperation file = new fileOperation();
+    static fileOperation file;
 
    public pilot(Activity activity)
    {
     this.activity=activity;
 
        blad = (TextView) this.activity.findViewById(R.id.textView1);
+       file = new fileOperation();
        file.read();
 
 
@@ -51,6 +53,12 @@ public class pilot   {
 
 
 
+    }
+
+    public void showcos()
+    {
+        DialogFragment dialasd = new hostNameDialog();
+        dialasd.show(pilot.activity.getFragmentManager(), "asd");
     }
 
     public pilot() {
@@ -70,6 +78,7 @@ public class pilot   {
             // Pass null as the parent view because its going in the dialog layout
             final View v = inflater.inflate(R.layout.activity_main, null);
             builder.setView(v)
+                    .setTitle("wpisz nazwę komputera")
                     // Add action buttons
 
                     .setNegativeButton("anuluj", new DialogInterface.OnClickListener() {
@@ -93,5 +102,6 @@ public class pilot   {
                     });
             return builder.create();
         }
+
     }
 }

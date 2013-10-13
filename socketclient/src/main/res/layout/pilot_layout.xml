@@ -3,7 +3,18 @@
 <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/tlopilot"
+        >
+
+
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imagePrzyciski"
+            android:layout_gravity="center"
+            android:src="@drawable/przyciski"
+            />
 
     <ImageView
             android:layout_width="fill_parent"
@@ -23,59 +34,63 @@
     <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/imagePrzyciski"
+            android:id="@+id/imageInfo"
             android:layout_gravity="center"
-            android:src="@drawable/przyciski"
-            android:alpha="0"/>
+            android:src="@drawable/info"
+            android:visibility="invisible"/>
 
-    <SlidingDrawer
-            android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:content="@+id/content"
-            android:handle="@+id/handle"
-            android:id="@+id/slidingDrawer"
-            android:layout_gravity="center_horizontal|bottom"
-            >
+    <SlidingDrawer android:id="@+id/slidingDrawer"
+                   android:layout_width="fill_parent"
+                   android:layout_height="fill_parent"
+                   android:handle="@+id/handle"
+                   android:content="@+id/content">
+
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/handle"
+                >
+            <ImageView android:src="@drawable/ic_launcher"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentRight="true"
+                       android:id="@+id/handleImag"
+                       android:visibility="gone"/>
+        </RelativeLayout>
 
         <LinearLayout
-                android:id="@+id/content"
+                android:gravity="top"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:background="#163079" android:id="@+id/content"
                 android:orientation="vertical"
-                android:background="@drawable/baloon"
-                >
-
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="         ukryj           "
-                    android:id="@+id/buttonUkryj"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"/>
+                android:paddingTop="10dp"
+                android:animateLayoutChanges="true"
+                android:paddingBottom="10dp">
 
             <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="zmien komputer"
                     android:id="@+id/buttonNameChange"/>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:id="@+id/container2"
+                    android:animateLayoutChanges="true"
+                    >
+            </LinearLayout>
+
+            <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New Button"
+                    android:id="@+id/button"/>
+
         </LinearLayout>
 
-        <Button
-                android:id="@+id/handle"
-                android:layout_width="wrap_content"
-                android:layout_height="0px"
-                android:text="Handle"
-                android:visibility="invisible"
-                android:height="1px"
-                android:focusableInTouchMode="false"/>
     </SlidingDrawer>
-
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageInfo"
-            android:layout_gravity="center"
-            android:src="@drawable/info"
-            android:visibility="invisible"/>
-
 </FrameLayout>
