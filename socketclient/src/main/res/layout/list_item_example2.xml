@@ -14,7 +14,7 @@
   limitations under the License.
   -->
 
-<FrameLayout
+<LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
@@ -26,7 +26,9 @@
                     android:background="#bbbbbb"
                     android:id="@+id/relativeLayout"
                     android:layout_gravity="center_horizontal|top"
-                    android:paddingTop="7dp">
+                    android:paddingTop="7dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-20dp">
 
         <Button
                 style="?android:attr/buttonStyleSmall"
@@ -39,14 +41,12 @@
 
         <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/servName"
+                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="12dp"
                 android:layout_toLeftOf="@+id/buttondel"
-                android:layout_marginRight="12dp"
-                android:layout_alignBottom="@+id/buttondel"
-                android:textIsSelectable="false"/>
+                android:layout_marginLeft="12dp"/>
 
         <Button
                 style="?android:attr/buttonStyleSmall"
@@ -54,7 +54,9 @@
                 android:layout_height="wrap_content"
                 android:text="potwierdz"
                 android:id="@+id/saveName"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginTop="24dp"
                 android:layout_below="@+id/servName"
                 android:layout_alignRight="@+id/servName"/>
     </RelativeLayout>
-</FrameLayout>
+</LinearLayout>

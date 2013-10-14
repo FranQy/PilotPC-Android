@@ -68,27 +68,48 @@
                 android:animateLayoutChanges="true"
                 android:paddingBottom="10dp">
 
-            <Button
+            <ScrollView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="zmien komputer"
-                    android:id="@+id/buttonNameChange"/>
+                    android:id="@+id/scrollView">
 
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left|center_vertical"
-                    android:id="@+id/container2"
-                    android:animateLayoutChanges="true"
-                    >
-            </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
 
-            <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:id="@+id/button"/>
+                    <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="zmien komputer"
+                            android:id="@+id/buttonNameChange"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:id="@+id/container2"
+                            android:animateLayoutChanges="true"
+                            >
+                    </LinearLayout>
+
+                    <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="INFO"
+                            android:id="@+id/buttonInfo"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:id="@+id/infoContainer"
+                            android:animateLayoutChanges="true">
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:paddingBottom="5dp"
+              android:background="#bbbbbb">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:background="#bbbbbb">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="CODER"
+                android:id="@+id/textView"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-FranQy"
+                android:id="@+id/textView2"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="DESIGNERS"
+                android:id="@+id/textView3"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-FranQy"
+                android:id="@+id/textView4"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-Wieczur"
+                android:id="@+id/textView5"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="BETA TESTERS"
+                android:id="@+id/textView6"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-frajer"
+                android:id="@+id/textView7"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-M.K."
+                android:id="@+id/textView8"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-M.P."
+                android:id="@+id/textView9"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="CONTACT"
+                android:id="@+id/textView10"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="dev.franqy.gmail.com"
+                android:id="@+id/textView11"
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/infoAuthorTxT"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:src="@drawable/przyciski"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/closeInfo"
+                android:layout_gravity="center_horizontal|top"
+                android:background="@drawable/ic_list_remove"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -55,12 +55,12 @@ public class pilot   {
 
     }
 
-    public void showcos()
+  /*  public void showcos()
     {
         DialogFragment dialasd = new hostNameDialog();
         dialasd.show(pilot.activity.getFragmentManager(), "asd");
     }
-
+*/
     public pilot() {
 
     }

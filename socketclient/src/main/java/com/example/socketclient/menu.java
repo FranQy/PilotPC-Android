@@ -16,9 +16,9 @@ import android.widget.EditText;
  */
 public class menu extends Activity {
 
-    ViewGroup mContainerView;
+    ViewGroup mContainerView, infoContainerView;
 
-     ViewGroup nameView;
+     ViewGroup nameView, infoView;
 
 
 
@@ -29,9 +29,13 @@ public class menu extends Activity {
         this.activity=activity;
 
         mContainerView = (ViewGroup) this.activity.findViewById(R.id.container2);
+        infoContainerView = (ViewGroup) this.activity.findViewById(R.id.infoContainer);
 
          nameView = (ViewGroup) LayoutInflater.from(this.activity).inflate(
                 R.layout.list_item_example2, mContainerView, false);
+
+       infoView = (ViewGroup) LayoutInflater.from(this.activity).inflate(
+                R.layout.authors, infoContainerView, false);
 
        Button nameButton = (Button) this.activity.findViewById(R.id.buttonNameChange);
         nameButton.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +47,21 @@ public class menu extends Activity {
                 else
                 {
                     mContainerView.removeView(nameView);
+                }
+            }
+        });
+
+
+       Button infoButton = (Button) this.activity.findViewById(R.id.buttonInfo);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(infoContainerView.getChildCount()==0){
+                    addInfo();
+                }
+                else
+                {
+                    infoContainerView.removeView(infoView);
                 }
             }
         });
@@ -74,6 +93,35 @@ public class menu extends Activity {
         mContainerView.addView(nameView, 0);
 
 
+    }
+
+
+    private void addInfo() {
+
+        infoView.findViewById(R.id.closeInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infoContainerView.removeView(infoView);
+            }
+        });
+        infoContainerView.addView(infoView, 0);
+
+
+    }
+
+    public boolean closeMENU()
+    {
+        if(mContainerView.getChildCount()==1)
+        {
+            mContainerView.removeView(nameView);
+            return true;
+        }
+        else if(infoContainerView.getChildCount()==1)
+        {
+            infoContainerView.removeView(infoView);
+            return true;
+        }
+       return false;
     }
 
 }

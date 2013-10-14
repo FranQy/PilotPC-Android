@@ -45,8 +45,8 @@ public class fileOperation {
         } catch (Exception e) {
             e.printStackTrace();
 
-            pilot Pilot1 = new pilot();
-            Pilot1.showcos();
+          //  pilot Pilot1 = new pilot();
+           // Pilot1.showcos();
         }
 
 

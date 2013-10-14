@@ -382,11 +382,20 @@ switch (output)
 
     }
 */
+  @Override
     public void onBackPressed()
     {
 
-        super.onBackPressed();
+        //super.onBackPressed();
+
+       /* menu men = new menu(this);
+        if(men.closeMENU())
+        {
 pilot.file.rozlacz();
+            finish();
+        }*/
+        pilot.file.rozlacz();
+        finish();
       //myAsync.closeSocket();
 
 
