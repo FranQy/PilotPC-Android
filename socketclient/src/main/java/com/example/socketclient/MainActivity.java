@@ -6,23 +6,27 @@ import java.io.PrintWriter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 
-import android.net.wifi.SupplicantState;
+import android.content.Context;
+
+
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
-import android.provider.Settings;
+
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
+
+
 
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
 
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+
+import android.widget.ViewFlipper;
 
 
 @SuppressWarnings("ALL")
@@ -48,17 +52,106 @@ public class MainActivity extends Activity implements AsyncResponse {
  //   InetSocketAddress asddd;
     PrintWriter out;
     pilot pilot;
-
+menu men;
     String servername= "";
 
-
+ViewFlipper vf;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot_layout);
-       //vf=(ViewFlipper)findViewById(R.id.ViewFlipper01);
+        men = new menu(this);
+        /**
+         * viewFlipper construct and show pilotlay.xml
+         */
+       vf=(ViewFlipper)findViewById(R.id.viewFlippermoj);
+       vf.setDisplayedChild(1);
+/**
+ * menuBar buttons constructors
+ */
+        Button gamepad = (Button) findViewById(R.id.buttonGamepad);
+        Button pilotButton = (Button) findViewById(R.id.buttonPilot);
+        Button keyboard = (Button) findViewById(R.id.buttonKeyboard);
+        Button mouse = (Button) findViewById(R.id.buttonMouse);
+
+/**
+ * menuBar buttons onClickListeners
+ * show layouts
+ * 0 - gamepadlay.xml
+ * 1 - pilotlay.xml
+ * 2 - keyboardlay.xml
+ * 3 - mouselay.xml
+ */
+
+        gamepad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(vf.getDisplayedChild()!=0){
+                    vf.setInAnimation(inFromLeftAnimation());
+                    vf.setOutAnimation(outToRightAnimation());
+               vf.setDisplayedChild(0);
+                }
+
+            }
+        });
+
+
+
+        pilotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(vf.getDisplayedChild()==0)
+                {
+                    vf.setInAnimation(inFromRightAnimation());
+                    vf.setOutAnimation(outToLeftAnimation());
+                    vf.setDisplayedChild(1);
+                }
+
+                else if(vf.getDisplayedChild()>1){
+                    vf.setInAnimation(inFromLeftAnimation());
+                    vf.setOutAnimation(outToRightAnimation());
+                vf.setDisplayedChild(1);
+                }
+            }
+        });
+
+        keyboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(vf.getDisplayedChild()<2)
+                {
+                    vf.setInAnimation(inFromRightAnimation());
+                    vf.setOutAnimation(outToLeftAnimation());
+                    vf.setDisplayedChild(2);
+                }
+
+                else if(vf.getDisplayedChild()>2){
+                    vf.setInAnimation(inFromLeftAnimation());
+                    vf.setOutAnimation(outToRightAnimation());
+                    vf.setDisplayedChild(2);
+                }
+            }
+        });
+
+        mouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(vf.getDisplayedChild()<3)
+                {
+                    vf.setInAnimation(inFromRightAnimation());
+                    vf.setOutAnimation(outToLeftAnimation());
+                    vf.setDisplayedChild(3);
+                }
+
+            }
+        });
+
+        /**
+         * end of menu Bar buttons listeners
+         */
 
         //FrameLayout mojanim = (FrameLayout) findViewById(R.id)
      //  Button mojanim = (Button) findViewById(R.id.buttonAim);
@@ -103,7 +196,7 @@ public class MainActivity extends Activity implements AsyncResponse {
             }
         });*/
 
-        mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        /*mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
 
 
@@ -118,7 +211,7 @@ public class MainActivity extends Activity implements AsyncResponse {
            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
            finish();
        }
-
+*/
 
 
         //odswierz = (ImageView) findViewById(R.id.imageView2);
@@ -134,7 +227,10 @@ public class MainActivity extends Activity implements AsyncResponse {
 
     }
 
-
+    /**
+     *
+     * input from connecting class
+     */
 
     public void processFinish(PrintWriter output){
         //this you will received result fired from async class of onPostExecute(result) method.
@@ -221,9 +317,12 @@ switch (output)
             }
         }
         return false;
-    }
+    }*/
 
-    //for the previous movement
+    /**
+     * viewFlipper's animations
+     * @return
+     */
     public static Animation inFromRightAnimation() {
 
         Animation inFromRight = new TranslateAnimation(
@@ -261,7 +360,12 @@ switch (output)
         outtoRight.setDuration(350);
         outtoRight.setInterpolator(new AccelerateInterpolator());
         return outtoRight;
-    }*/
+    }
+
+
+    /**
+     * end of viewFlipper's animations
+     */
 
 
 
@@ -270,11 +374,7 @@ switch (output)
 
 
 
-
-
-
-
-    public class WiFiDialog extends DialogFragment {
+ /*   public class WiFiDialog extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -326,7 +426,7 @@ switch (output)
                     });
             return builder.create();
         }
-    }
+    }*/
 
 
 
@@ -388,14 +488,15 @@ switch (output)
 
         //super.onBackPressed();
 
-       /* menu men = new menu(this);
-        if(men.closeMENU())
+
+        if(!men.closeMENU())
         {
 pilot.file.rozlacz();
             finish();
-        }*/
-        pilot.file.rozlacz();
-        finish();
+        }
+
+       // pilot.file.rozlacz();
+       // finish();
       //myAsync.closeSocket();
 
 
@@ -405,7 +506,8 @@ pilot.file.rozlacz();
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            pilot.przyciski1.sliding.animateOpen();
+            //pilot.przyciski1.sliding.animateOpen();
+            men.openclose();
             return true;
         }
         return super.onKeyUp(keyCode, event);

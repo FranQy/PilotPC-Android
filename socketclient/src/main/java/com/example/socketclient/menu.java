@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SlidingDrawer;
 
 
 /**
  * Created by franqy on 12.10.13.
- * trololo
+ * MENU
  */
 public class menu extends Activity {
 
@@ -20,13 +21,15 @@ public class menu extends Activity {
 
      ViewGroup nameView, infoView;
 
-
+    ClickableSlidingDrawer sliding;
 
     public static Activity activity;
 
     public menu(Activity activity)
     {
         this.activity=activity;
+
+        sliding = (ClickableSlidingDrawer) this.activity.findViewById(R.id.slidingDrawer);
 
         mContainerView = (ViewGroup) this.activity.findViewById(R.id.container2);
         infoContainerView = (ViewGroup) this.activity.findViewById(R.id.infoContainer);
@@ -36,6 +39,16 @@ public class menu extends Activity {
 
        infoView = (ViewGroup) LayoutInflater.from(this.activity).inflate(
                 R.layout.authors, infoContainerView, false);
+
+
+        sliding.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+                closeMENUall();
+
+            }
+        });
+
 
        Button nameButton = (Button) this.activity.findViewById(R.id.buttonNameChange);
         nameButton.setOnClickListener(new View.OnClickListener() {
@@ -109,19 +122,47 @@ public class menu extends Activity {
 
     }
 
-    public boolean closeMENU()
+    private void closeMENUall()
     {
         if(mContainerView.getChildCount()==1)
         {
             mContainerView.removeView(nameView);
-            return true;
+
         }
-        else if(infoContainerView.getChildCount()==1)
+        if(infoContainerView.getChildCount()==1)
+        {
+            infoContainerView.removeView(infoView);
+
+        }
+
+    }
+
+    public boolean closeMENU()
+    {
+
+        if(infoContainerView.getChildCount()==1)
         {
             infoContainerView.removeView(infoView);
             return true;
         }
+        else if(mContainerView.getChildCount()==1)
+        {
+            mContainerView.removeView(nameView);
+            return true;
+        }
+        else if(sliding.isOpened())
+        {
+            sliding.animateClose();
+            return true;
+        }
        return false;
+    }
+
+
+
+    public  void openclose()
+    {
+        sliding.animateToggle();
     }
 
 }

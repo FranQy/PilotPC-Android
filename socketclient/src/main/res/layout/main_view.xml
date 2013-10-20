@@ -6,14 +6,11 @@
         >
 
 
-    <ViewFlipper android:id="@+id/ViewFlipper01"
-                 android:layout_width="fill_parent"
-                 android:layout_height="fill_parent"
-            >
-        <include android:id="@+id/libraryView1"  layout="@layout/touchpad" />
-        <include android:id="@+id/libraryView2"  layout="@layout/pilot_layout" />
-
-
-    </ViewFlipper>
-
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/przyciski"/>
 </RelativeLayout>

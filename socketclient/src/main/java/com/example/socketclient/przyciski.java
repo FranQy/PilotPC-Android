@@ -13,9 +13,10 @@ import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.ImageView;
 
-import android.widget.SlidingDrawer;
+
 import android.widget.TextView;
 
 import java.io.PrintWriter;
@@ -28,9 +29,10 @@ public class przyciski extends pilot{
   //  public Activity activity;
     boolean klawisze = false;
     ImageView przyciskia, infoImage, hand;
-    SlidingDrawer sliding;
+
 
     PrintWriter out;
+
 
 
     public przyciski(){
@@ -43,13 +45,12 @@ super();
 blad.setText("asd");
         przyciskia = (ImageView) this.activity.findViewById(R.id.imagePrzyciski);
         infoImage =(ImageView) this.activity.findViewById(R.id.imageInfo);
-        sliding = (SlidingDrawer) this.activity.findViewById(R.id.slidingDrawer);
+
        // connectingSlidingMenu = (SlidingDrawer) this.activity.findViewById(R.id.slidingDrawer2);
-        //ukryj = (Button) this.activity.findViewById(R.id.buttonUkryj);
+      // PilotButton = (ImageView) this.activity.findViewById(R.id.pilotButton);
 
         hand = (ImageView)this.activity.findViewById(R.id.handleImag);
 //testLay = (LinearLayout) this.activity.findViewById(R.id.linearLayout4);
-
 
 
 
@@ -91,7 +92,7 @@ blad.setText("asd");
 
 
 
-                   blad.setText(String.valueOf(x));
+                  // blad.setText(String.valueOf(x));
 
 
                 if(x>0 && x<500)
@@ -111,15 +112,9 @@ void ktoryPrzycisk(int touchedRGB)
 {
     if(touchedRGB == -14149877)
     {
-        blad.setText("menu");
-        click();
-        hand.setVisibility(View.VISIBLE);
-        sliding.animateOpen();
+        blad.setText("menu masz na dole");
+       // click();
 
-     // menu men = new menu();
-       // men.cosaa();
-        menu men = new menu(this.activity);
-       // men.cosaa();
 
 
     }

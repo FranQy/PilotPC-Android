@@ -1,117 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<RelativeLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:background="@drawable/tlopilot"
-        >
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10"
+                 android:id="@+id/frameLayout1"
+                 android:layout_gravity="center"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginLeft="0dp"
+                 android:layout_alignParentTop="true"
+                 android:layout_marginTop="0dp"
+                 android:paddingBottom="45dp">
 
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imagePrzyciski"
-            android:layout_gravity="center"
-            android:src="@drawable/przyciski"
-            />
-
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageView"
-            android:layout_gravity="right|center_vertical"
-            android:src="@drawable/hgfh2"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView1"
-            android:layout_gravity="center_horizontal|top"/>
-
-    <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageInfo"
-            android:layout_gravity="center"
-            android:src="@drawable/info"
-            android:visibility="invisible"/>
-
-    <SlidingDrawer android:id="@+id/slidingDrawer"
-                   android:layout_width="fill_parent"
-                   android:layout_height="fill_parent"
-                   android:handle="@+id/handle"
-                   android:content="@+id/content">
-
-        <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/handle"
-                >
-            <ImageView android:src="@drawable/ic_launcher"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_alignParentRight="true"
-                       android:id="@+id/handleImag"
-                       android:visibility="gone"/>
-        </RelativeLayout>
-
-        <LinearLayout
-                android:gravity="top"
+        <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#163079" android:id="@+id/content"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:animateLayoutChanges="true"
-                android:paddingBottom="10dp">
+                android:id="@+id/imagePrzyciski"
+                android:layout_gravity="center"
+                android:src="@drawable/przyciski"/>
 
-            <ScrollView
+        <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView"
+                android:layout_gravity="right|center_vertical"
+                android:src="@drawable/hgfh2"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textView1"
+                android:layout_gravity="center_horizontal|top"/>
+
+        <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageInfo"
+                android:layout_gravity="center"
+                android:src="@drawable/info"
+                android:visibility="invisible"/>
+
+        <ViewFlipper
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/viewFlippermoj">
+            <include android:id="@+id/libraryView1"  layout="@layout/gamepadlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/pilotlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/keyboardlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/mouselay" />
+                </ViewFlipper>
+
+    </FrameLayout>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp">
+
+        <com.example.socketclient.ClickableSlidingDrawer
+                android:id="@+id/slidingDrawer"
+                android:layout_width="fill_parent"
+                android:layout_height="400dp"
+                android:handle="@+id/handle"
+                android:content="@+id/content"
+                android:layout_gravity="bottom">
+
+            <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/scrollView">
 
-                <LinearLayout
-                        android:orientation="vertical"
+                    android:id="@+id/handle"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="5dp"
+                    android:background="#2e2e2e"
+                    android:paddingTop="5dp"
+                    android:clickable="true">
+
+                <ImageView
+                        android:src="@drawable/opcje"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/handleImag"
+                        android:layout_marginRight="10dp"/>
+
+                <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="40dp"
+                        android:layout_height="@dimen/MenuButtonsWidth"
+                        android:id="@+id/buttonGamepad"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="@dimen/menuPaddingButtons"
+                        android:background="@drawable/gamepad"/>
+
+                <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="@dimen/MenuButtonsWidth"
+                        android:layout_height="40dp"
+                        android:id="@+id/buttonPilot"
+                        android:background="@drawable/pilot"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/buttonGamepad"/>
+
+                <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="@dimen/MenuButtonsWidth"
+                        android:layout_height="40dp"
+                        android:id="@+id/buttonKeyboard"
+                        android:layout_toRightOf="@+id/buttonPilot"
+                        android:layout_marginLeft="@dimen/menuPaddingButtons"
+                        android:layout_marginRight="@dimen/menuPaddingButtons"
+                        android:background="@drawable/klawiatura"/>
+
+                <Button
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="@dimen/MenuButtonsWidth"
+                        android:layout_height="40dp"
+                        android:id="@+id/buttonMouse"
+                        android:layout_toRightOf="@+id/buttonKeyboard"
+                        android:background="@drawable/myszka"
+                        android:layout_marginLeft="@dimen/menuPaddingButtons"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:gravity="top"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#2e2e2e"
+                    android:id="@+id/content"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="false"
+                    android:paddingBottom="10dp">
+
+                <RelativeLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
 
-                    <Button
-                            android:layout_width="fill_parent"
+                    <TextView
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:text="zmien komputer"
-                            android:id="@+id/buttonNameChange"/>
+                            android:text="gamepad"
+                            android:id="@+id/textView"
+                            android:layout_marginLeft="30dp"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:textSize="12dp"
+                            android:textColor="@color/infoAuthorTxT"/>
+
+                    <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="pilot"
+                            android:id="@+id/textView2"
+                            android:layout_toRightOf="@+id/textView"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:textSize="12dp"
+                            android:textColor="@color/infoAuthorTxT"/>
+
+                    <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="klawiatura"
+                            android:id="@+id/textView3"
+                            android:layout_toRightOf="@+id/textView2"
+                            android:singleLine="true"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:textColor="@color/infoAuthorTxT"/>
+
+                    <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="mysz"
+                            android:id="@+id/textView4"
+                            android:layout_toRightOf="@+id/textView3"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:autoText="true"
+                            android:singleLine="true"
+                            android:textSize="12dp"
+                            android:textColor="@color/infoAuthorTxT"/>
+                </RelativeLayout>
+
+                <ScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/scrollView">
 
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left|center_vertical"
-                            android:id="@+id/container2"
-                            android:animateLayoutChanges="true"
-                            >
+                            android:layout_height="fill_parent">
+
+                        <Button
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="zmien komputer"
+                                android:id="@+id/buttonNameChange"
+                                android:singleLine="true"
+                                android:textSize="25dp"
+                                android:gravity="left"
+                                android:background="#2e2e2e"
+                                android:layout_marginLeft="10dp"
+                                android:typeface="normal"
+                                android:layout_marginBottom="10dp"
+                                android:textColor="@color/infoAuthorTxT"
+                                android:layout_marginTop="30dp"/>
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|center_vertical"
+                                android:id="@+id/container2"
+                                android:animateLayoutChanges="true"/>
+
+                        <Button
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="informacje"
+                                android:id="@+id/buttonInfo"
+                                android:typeface="normal"
+                                android:gravity="left"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="#2e2e2e"
+                                android:textColor="@color/infoAuthorTxT"
+                                android:textSize="25dp"/>
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/infoContainer"
+                                android:animateLayoutChanges="true"/>
                     </LinearLayout>
+                </ScrollView>
 
-                    <Button
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="INFO"
-                            android:id="@+id/buttonInfo"/>
+            </LinearLayout>
+        </com.example.socketclient.ClickableSlidingDrawer>
 
-                    <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:id="@+id/infoContainer"
-                            android:animateLayoutChanges="true">
-                    </LinearLayout>
+    </FrameLayout>
 
-                </LinearLayout>
-            </ScrollView>
-
-        </LinearLayout>
-
-    </SlidingDrawer>
-</FrameLayout>
+</RelativeLayout>

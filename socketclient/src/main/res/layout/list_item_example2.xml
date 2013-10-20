@@ -23,12 +23,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:background="#bbbbbb"
                     android:id="@+id/relativeLayout"
                     android:layout_gravity="center_horizontal|top"
                     android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-20dp">
+                    android:layout_marginTop="-20dp"
+                    android:background="#555555">
 
         <Button
                 style="?android:attr/buttonStyleSmall"
