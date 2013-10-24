@@ -5,11 +5,27 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+
+
+
+
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"/>
+
+    <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Gamepad"
-            android:id="@+id/textView"
-            android:layout_gravity="left|center_vertical"/>
+            android:id="@+id/progressBar2"
+            android:layout_gravity="center"/>
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar4"/>
+
 </LinearLayout>

@@ -16,21 +16,19 @@
                  android:layout_marginLeft="0dp"
                  android:layout_alignParentTop="true"
                  android:layout_marginTop="0dp"
-                 android:paddingBottom="45dp">
+                 android:paddingBottom="45dp"
+                 android:background="#27201b">
 
-        <ImageView
+        <ViewFlipper
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/imagePrzyciski"
-                android:layout_gravity="center"
-                android:src="@drawable/przyciski"/>
-
-        <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageView"
-                android:layout_gravity="right|center_vertical"
-                android:src="@drawable/hgfh2"/>
+                android:id="@+id/viewFlippermoj"
+                android:visibility="visible">
+            <include android:id="@+id/libraryView1"  layout="@layout/gamepadlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/pilotlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/keyboardlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/mouselay" />
+                </ViewFlipper>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -38,25 +36,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
                 android:id="@+id/textView1"
-                android:layout_gravity="center_horizontal|top"/>
-
-        <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageInfo"
-                android:layout_gravity="center"
-                android:src="@drawable/info"
-                android:visibility="invisible"/>
-
-        <ViewFlipper
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/viewFlippermoj">
-            <include android:id="@+id/libraryView1"  layout="@layout/gamepadlay" />
-            <include android:id="@+id/libraryView2"  layout="@layout/pilotlay" />
-            <include android:id="@+id/libraryView2"  layout="@layout/keyboardlay" />
-            <include android:id="@+id/libraryView2"  layout="@layout/mouselay" />
-                </ViewFlipper>
+                android:layout_gravity="center_horizontal|top"
+                android:textColor="#94ff58"/>
 
     </FrameLayout>
 
@@ -66,7 +47,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="0dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp">
+            android:layout_marginTop="0dp"
+            >
 
         <com.example.socketclient.ClickableSlidingDrawer
                 android:id="@+id/slidingDrawer"
@@ -81,11 +63,12 @@
                     android:layout_height="wrap_content"
 
                     android:id="@+id/handle"
-                    android:paddingRight="20dp"
+                    android:paddingRight="10dp"
                     android:paddingBottom="5dp"
                     android:background="#2e2e2e"
                     android:paddingTop="5dp"
-                    android:clickable="true">
+                    android:clickable="true"
+                    >
 
                 <ImageView
                         android:src="@drawable/opcje"
@@ -93,45 +76,57 @@
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:id="@+id/handleImag"
-                        android:layout_marginRight="10dp"/>
+                        />
 
-                <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="40dp"
-                        android:layout_height="@dimen/MenuButtonsWidth"
-                        android:id="@+id/buttonGamepad"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="@dimen/menuPaddingButtons"
-                        android:background="@drawable/gamepad"/>
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentLeft="false"
+                        android:measureWithLargestChild="false">
 
-                <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="@dimen/MenuButtonsWidth"
-                        android:layout_height="40dp"
-                        android:id="@+id/buttonPilot"
-                        android:background="@drawable/pilot"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/buttonGamepad"/>
+                    <ImageButton
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="@dimen/MenuButtonsWidth"
+                            android:layout_height="40dp"
+                            android:id="@+id/buttonGamepad"
+                            android:background="#002e2e2e"
+                            android:src="@drawable/gamepad"
+                            android:scaleType="fitCenter"
+                            />
 
-                <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="@dimen/MenuButtonsWidth"
-                        android:layout_height="40dp"
-                        android:id="@+id/buttonKeyboard"
-                        android:layout_toRightOf="@+id/buttonPilot"
-                        android:layout_marginLeft="@dimen/menuPaddingButtons"
-                        android:layout_marginRight="@dimen/menuPaddingButtons"
-                        android:background="@drawable/klawiatura"/>
+                    <ImageButton
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/buttonPilot"
+                            android:layout_toRightOf="@+id/buttonGamepad"
+                            android:background="#002e2e2e"
+                            android:src="@drawable/pilot"
+                            android:visibility="visible"
+                            android:scaleType="fitCenter"/>
 
-                <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="@dimen/MenuButtonsWidth"
-                        android:layout_height="40dp"
-                        android:id="@+id/buttonMouse"
-                        android:layout_toRightOf="@+id/buttonKeyboard"
-                        android:background="@drawable/myszka"
-                        android:layout_marginLeft="@dimen/menuPaddingButtons"/>
+                    <ImageButton
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="@dimen/MenuButtonsWidth"
+                            android:layout_height="40dp"
+                            android:id="@+id/buttonKeyboard"
+                            android:layout_toRightOf="@+id/buttonPilot"
+                            android:background="#002e2e2e"
+                            android:src="@drawable/klawiatura"
+                            android:scaleType="fitCenter"/>
+
+                    <ImageButton
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="@dimen/MenuButtonsWidth"
+                            android:layout_height="40dp"
+                            android:id="@+id/buttonMouse"
+                            android:layout_toRightOf="@+id/buttonKeyboard"
+                            android:background="#002e2e2e"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/myszka"
+                            android:layout_marginRight="20dp"/>
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -150,54 +145,62 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp">
 
-                    <TextView
-                            android:layout_width="60dp"
+                    <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="gamepad"
-                            android:id="@+id/textView"
-                            android:layout_marginLeft="30dp"
-                            android:textAlignment="center"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:textSize="12dp"
-                            android:textColor="@color/infoAuthorTxT"/>
+                            android:layout_centerHorizontal="true">
 
-                    <TextView
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:text="pilot"
-                            android:id="@+id/textView2"
-                            android:layout_toRightOf="@+id/textView"
-                            android:textAlignment="center"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:textSize="12dp"
-                            android:textColor="@color/infoAuthorTxT"/>
+                        <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="gamepad"
+                                android:id="@+id/textView"
+                                android:textAlignment="center"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:textSize="12dp"
+                                android:textColor="@color/infoAuthorTxT"
+                                />
 
-                    <TextView
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:text="klawiatura"
-                            android:id="@+id/textView3"
-                            android:layout_toRightOf="@+id/textView2"
-                            android:singleLine="true"
-                            android:textAlignment="center"
-                            android:gravity="center"
-                            android:textSize="12dp"
-                            android:textColor="@color/infoAuthorTxT"/>
+                        <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="pilot"
+                                android:id="@+id/textView2"
+                                android:layout_toRightOf="@+id/textView"
+                                android:textAlignment="center"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:textSize="12dp"
+                                android:textColor="@color/infoAuthorTxT"/>
 
-                    <TextView
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:text="mysz"
-                            android:id="@+id/textView4"
-                            android:layout_toRightOf="@+id/textView3"
-                            android:textAlignment="center"
-                            android:gravity="center"
-                            android:autoText="true"
-                            android:singleLine="true"
-                            android:textSize="12dp"
-                            android:textColor="@color/infoAuthorTxT"/>
+                        <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="klawiatura"
+                                android:id="@+id/textView3"
+                                android:layout_toRightOf="@+id/textView2"
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:gravity="center"
+                                android:textSize="12dp"
+                                android:textColor="@color/infoAuthorTxT"/>
+
+                        <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="mysz"
+                                android:id="@+id/textView4"
+                                android:layout_toRightOf="@+id/textView3"
+                                android:textAlignment="center"
+                                android:gravity="center"
+                                android:autoText="true"
+                                android:singleLine="true"
+                                android:textSize="12dp"
+                                android:textColor="@color/infoAuthorTxT"
+                                android:layout_marginRight="20dp"/>
+
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <ScrollView

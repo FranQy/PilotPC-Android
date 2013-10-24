@@ -10,6 +10,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -18,7 +20,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 
-
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -26,6 +28,9 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
@@ -61,6 +66,7 @@ ViewFlipper vf;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.pilot_layout);
         men = new menu(this);
         /**
@@ -71,10 +77,10 @@ ViewFlipper vf;
 /**
  * menuBar buttons constructors
  */
-        Button gamepad = (Button) findViewById(R.id.buttonGamepad);
-        Button pilotButton = (Button) findViewById(R.id.buttonPilot);
-        Button keyboard = (Button) findViewById(R.id.buttonKeyboard);
-        Button mouse = (Button) findViewById(R.id.buttonMouse);
+        ImageButton gamepad = (ImageButton) findViewById(R.id.buttonGamepad);
+        ImageButton pilotButton = (ImageButton) findViewById(R.id.buttonPilot);
+        ImageButton keyboard = (ImageButton) findViewById(R.id.buttonKeyboard);
+        ImageButton mouse = (ImageButton) findViewById(R.id.buttonMouse);
 
 /**
  * menuBar buttons onClickListeners
@@ -179,8 +185,74 @@ ViewFlipper vf;
 
        // View newView = (View) findViewById(R.id)
        pilot = new pilot(this);
+pilot.blad.setText("asdasd");
+
+        final float[] mPreviousX = {0};
+        final float[] mPreviousY = {0};
+
+        ImageView mysz = (ImageView) findViewById(R.id.imageMysz);
+
+        mysz.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+               /* int pointerCount = motionEvent.getPointerCount();
+float fingerOneX=0;
+                float fingerTwoX=0;
+                switch (motionEvent.getAction())
+                {
+                    case MotionEvent.ACTION_MOVE:
+                    {
+                        for(int i = 0; i < pointerCount; ++i)
+                        {
+                            int pointerIndex = i;
+                            int pointerId = motionEvent.getPointerId(pointerIndex);
+
+                            if(pointerId == 0)
+                            {
+
+                                fingerOneX = motionEvent.getX(pointerIndex);
+                                //fingerOneY = event.getY(pointerIndex);
+                            }
+                            if(pointerId == 1)
+                            {
+
+                                fingerTwoX = motionEvent.getX(pointerIndex);
+                               // fingerTwoY = event.getY(pointerIndex);
+                            }
+                    }
+                }
+                }
+                    pilot.blad.setText(String.valueOf(fingerOneX)+" \r"+String.valueOf(fingerTwoX));*/
 
 
+                float x = motionEvent.getX();
+                float y = motionEvent.getY();
+
+                switch (motionEvent.getAction())
+                {
+                    case MotionEvent.ACTION_MOVE:
+                    {
+
+                        float dx = x - mPreviousX[0];
+                        float dy = y - mPreviousY[0];
+
+                        pilot.blad.setText(String.valueOf(dx)+" \r"+String.valueOf(dy));
+
+                    }
+
+
+
+                }
+
+                mPreviousX[0] = x;
+                mPreviousY[0] = y;
+
+
+                return true;
+
+            }
+        });
 
         /*buta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,6 +357,19 @@ switch (output)
         Log.d("async", "end2");
     }
 
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        pilot.blad.setText("landscape");
+        // Checks the orientation of the screen
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+          pilot.blad.setText("landscape");
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            pilot.blad.setText("portrait");
+        }
+    }
 
 
   /*  @Override

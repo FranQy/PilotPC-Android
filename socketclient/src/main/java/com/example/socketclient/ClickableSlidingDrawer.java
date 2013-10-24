@@ -37,8 +37,8 @@ public class ClickableSlidingDrawer extends SlidingDrawer {
     public boolean onInterceptTouchEvent(MotionEvent event) {
         if (mHandleLayout != null) {
             int childCount = mHandleLayout.getChildCount();
-            int handleClickX = (int)(event.getX() - mHandleLayout.getX());
-            int handleClickY = (int)(event.getY() - mHandleLayout.getY());
+            int handleClickX = (int)(event.getX() - mHandleLayout.getLeft());
+            int handleClickY = (int)(event.getY() - mHandleLayout.getTop());
 
             Rect hitRect = mHitRect;
 
@@ -47,12 +47,12 @@ public class ClickableSlidingDrawer extends SlidingDrawer {
 
                 childView.getHitRect(hitRect);
 
-                if(childView.isClickable())
-                {
+               // if(childView.isClickable())
+               // {
                 if (hitRect.contains(handleClickX, handleClickY)) {
                     return false;
                 }
-                }
+               // }
             }
         }
 
