@@ -1,7 +1,9 @@
 package com.example.socketclient;
 
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 import android.app.Activity;
@@ -17,6 +19,7 @@ import android.os.Bundle;
 
 
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 
 
@@ -30,12 +33,14 @@ import android.widget.Button;
 
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
 @SuppressWarnings("ALL")
 public class MainActivity extends Activity implements AsyncResponse {
+
 
 
   // boolean klawisze = false, odswierzPrzycisk = false;
@@ -55,12 +60,16 @@ public class MainActivity extends Activity implements AsyncResponse {
 
     AlertDialog alertDialog;
  //   InetSocketAddress asddd;
-    PrintWriter out;
+
     pilot pilot;
-menu men;
+   static touchPad touchp;
+
+    menu men;
     String servername= "";
 
 ViewFlipper vf;
+
+
 
 
     @Override
@@ -68,6 +77,10 @@ ViewFlipper vf;
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.pilot_layout);
+
+
+
+        touchp = new touchPad(this);
         men = new menu(this);
         /**
          * viewFlipper construct and show pilotlay.xml
@@ -184,77 +197,20 @@ ViewFlipper vf;
 
 
        // View newView = (View) findViewById(R.id)
+
+
+
+
+
        pilot = new pilot(this);
-pilot.blad.setText("asdasd");
-
-        final float[] mPreviousX = {0};
-        final float[] mPreviousY = {0};
-
-        ImageView mysz = (ImageView) findViewById(R.id.imageMysz);
-
-        mysz.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-               /* int pointerCount = motionEvent.getPointerCount();
-float fingerOneX=0;
-                float fingerTwoX=0;
-                switch (motionEvent.getAction())
-                {
-                    case MotionEvent.ACTION_MOVE:
-                    {
-                        for(int i = 0; i < pointerCount; ++i)
-                        {
-                            int pointerIndex = i;
-                            int pointerId = motionEvent.getPointerId(pointerIndex);
-
-                            if(pointerId == 0)
-                            {
-
-                                fingerOneX = motionEvent.getX(pointerIndex);
-                                //fingerOneY = event.getY(pointerIndex);
-                            }
-                            if(pointerId == 1)
-                            {
-
-                                fingerTwoX = motionEvent.getX(pointerIndex);
-                               // fingerTwoY = event.getY(pointerIndex);
-                            }
-                    }
-                }
-                }
-                    pilot.blad.setText(String.valueOf(fingerOneX)+" \r"+String.valueOf(fingerTwoX));*/
-
-
-                float x = motionEvent.getX();
-                float y = motionEvent.getY();
-
-                switch (motionEvent.getAction())
-                {
-                    case MotionEvent.ACTION_MOVE:
-                    {
-
-                        float dx = x - mPreviousX[0];
-                        float dy = y - mPreviousY[0];
-
-                        pilot.blad.setText(String.valueOf(dx)+" \r"+String.valueOf(dy));
-
-                    }
 
 
 
-                }
-
-                mPreviousX[0] = x;
-                mPreviousY[0] = y;
 
 
-                return true;
 
-            }
-        });
 
-        /*buta.setOnClickListener(new View.OnClickListener() {
+        /*buta.setOnClickLireturn false;stener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mContainerView.getChildCount()==0)
@@ -286,15 +242,7 @@ float fingerOneX=0;
 */
 
 
-        //odswierz = (ImageView) findViewById(R.id.imageView2);
 
-       /* odswierz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nameFile.read();
-
-            }
-        });*/
 
 
     }
@@ -303,22 +251,36 @@ float fingerOneX=0;
      *
      * input from connecting class
      */
+boolean costamif = false;
+
+
 
     public void processFinish(PrintWriter output){
         //this you will received result fired from async class of onPostExecute(result) method.
-
+        PrintWriter out;
       //  blad.setText("połączono");
         Log.d("async", "polaczono");
         out = null;
         out = output;
 
+//sendcos wyslij = new sendcos(out);
+       // wyslij.senda();
 
 
+//        touch.givePrintWriter(out);
+
+//boolean so = touchp.active;
+        touchp.blad.setText("tou");
+        touchp.active = true;
+        touchp.givePrintWriter(out);
         pilot.przyciski1.givePrintWriter(out);
         pilot.przyciski1.klawisze=true;
      //   pilot.blad.setText("asdads");
      //   myAsync.cancel();
     }
+
+
+
 
     public void processFinish(int output){
         //this you will received result fired from async class of onPostExecute(result) method.
@@ -348,10 +310,10 @@ switch (output)
 
 }
 //klawisze=false;
-
+touchp.active = false;
         pilot.przyciski1.klawisze=false;
 
-        out = null;
+        //out = null;
 
 
         Log.d("async", "end2");
@@ -621,7 +583,20 @@ pilot.file.rozlacz();
 
 
 
+public class sendcos
+{
+    PrintWriter b;
+    public sendcos(PrintWriter a)
+    {
+        b = a;
+        b.println("asaas");
+    }
 
+    public void senda()
+    {
+        b.println("asdasdasd");
+    }
+}
 
 
 

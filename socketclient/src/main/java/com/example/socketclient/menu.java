@@ -15,7 +15,7 @@ import android.widget.SlidingDrawer;
  * Created by franqy on 12.10.13.
  * MENU
  */
-public class menu extends Activity {
+public class menu {
 
     ViewGroup mContainerView, infoContainerView;
 
@@ -99,6 +99,7 @@ public class menu extends Activity {
             @Override
             public void onClick(View view) {
 //TODO: check Null pointer...
+
                 pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString());
             }
         });

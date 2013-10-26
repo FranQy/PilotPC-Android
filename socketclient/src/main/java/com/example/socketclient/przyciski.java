@@ -245,6 +245,12 @@ void ktoryPrzycisk(int touchedRGB)
             }
         }
     }
+
+
+
+
+
+
 }
 
     void givePrintWriter(PrintWriter out)
@@ -257,10 +263,23 @@ void ktoryPrzycisk(int touchedRGB)
         blad.setText(command);
         click();
     }
-    void click(){
+    public void click(){
         Vibrator v = (Vibrator) pilot.activity.getSystemService(Context.VIBRATOR_SERVICE);
         int VIBRATION_TIME = 80;
         v.vibrate(VIBRATION_TIME);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

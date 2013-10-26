@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -104,6 +105,9 @@ class connecting extends AsyncTask<String, Void, Integer> {
                         out = new PrintWriter(new BufferedWriter(
                                 new OutputStreamWriter(socket.getOutputStream())),
                                 true);
+
+
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -169,6 +173,12 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
 
         }
+
+    }
+
+    public class cos
+    {
+        public int aa=6;
 
     }
 

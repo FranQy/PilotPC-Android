@@ -19,6 +19,10 @@ public class fileOperation {
     {
          myAsync= new connecting();
     }
+    public fileOperation(boolean a)
+    {
+
+    }
 
     public void read()
     {
