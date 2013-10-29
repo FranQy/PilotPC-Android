@@ -12,6 +12,6 @@
             android:layout_height="fill_parent"
             android:id="@+id/imageMysz"
             android:layout_gravity="center"
-            android:src="@drawable/mysz"
+            android:src="@drawable/touchpadbackground"
             />
 </LinearLayout>

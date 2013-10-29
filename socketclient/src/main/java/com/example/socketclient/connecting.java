@@ -102,6 +102,20 @@ class connecting extends AsyncTask<String, Void, Integer> {
                 if(socket.isConnected())
                 {
                     try {
+                        /**
+                         * sending class (later)
+                         */
+
+                        /*?
+                        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                       TCP_Data dat = new TCP_Data();
+
+
+
+                       oos.writeObject(dat);
+
+                        oos.flush();
+                        oos.close();*/
                         out = new PrintWriter(new BufferedWriter(
                                 new OutputStreamWriter(socket.getOutputStream())),
                                 true);
@@ -113,7 +127,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
                     }
 
 
-                    if(out.checkError())
+                   if(out.checkError())
                     {
                     error = 1;
                         Log.d("async", "error 1");
