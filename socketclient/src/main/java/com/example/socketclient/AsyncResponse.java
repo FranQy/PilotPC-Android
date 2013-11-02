@@ -1,6 +1,7 @@
 package com.example.socketclient;
 
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
+
 
 /**
  * Created by franqy on 24.09.13.
@@ -9,5 +10,5 @@ import java.io.PrintWriter;
  */
 public interface AsyncResponse {
     void processFinish(int output);
-    void processFinish(PrintWriter output);
+    void processFinish(ObjectOutputStream output);
 }

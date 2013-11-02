@@ -29,6 +29,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
     Socket socket;
     InetSocketAddress SocketAdrr;
     PrintWriter out;
+    ObjectOutputStream oos;
     private static final int SERVERPORT = 12345;
 
 
@@ -106,9 +107,9 @@ class connecting extends AsyncTask<String, Void, Integer> {
                          * sending class (later)
                          */
 
-                        /*?
-                        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-                       TCP_Data dat = new TCP_Data();
+
+                        oos = new ObjectOutputStream(socket.getOutputStream());
+                       /*TCP_Data dat = new TCP_Data();
 
 
 
@@ -116,9 +117,11 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
                         oos.flush();
                         oos.close();*/
-                        out = new PrintWriter(new BufferedWriter(
+
+
+                       /* out = new PrintWriter(new BufferedWriter(
                                 new OutputStreamWriter(socket.getOutputStream())),
-                                true);
+                                true);*/
 
 
 
@@ -127,12 +130,12 @@ class connecting extends AsyncTask<String, Void, Integer> {
                     }
 
 
-                   if(out.checkError())
+                  /* if(out.checkError())
                     {
                     error = 1;
                         Log.d("async", "error 1");
                     }
-
+*/
 
 
 
@@ -176,7 +179,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
     protected void onPostExecute(Integer result) {
         if(result==0)
         {
-            delegate.processFinish(out);
+            delegate.processFinish(oos);
             Log.d("async", "ok, connected, send PrintWriter");
         }
         else
@@ -190,11 +193,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
     }
 
-    public class cos
-    {
-        public int aa=6;
 
-    }
 
 }
 

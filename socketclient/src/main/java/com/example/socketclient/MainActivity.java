@@ -255,13 +255,13 @@ boolean costamif = false;
 
 
 
-    public void processFinish(PrintWriter output){
+    public void processFinish( ObjectOutputStream  output){
         //this you will received result fired from async class of onPostExecute(result) method.
-        PrintWriter out;
+      //  PrintWriter out;
       //  blad.setText("połączono");
         Log.d("async", "polaczono");
-        out = null;
-        out = output;
+       // out = null;
+       // out = output;
 
 //sendcos wyslij = new sendcos(out);
        // wyslij.senda();
@@ -270,11 +270,13 @@ boolean costamif = false;
 //        touch.givePrintWriter(out);
 
 //boolean so = touchp.active;
+        ObjectOutputStream oos;
+        oos = output;
         touchp.blad.setText("tou");
         touchp.active = true;
-        touchp.givePrintWriter(out);
-        pilot.przyciski1.givePrintWriter(out);
-        pilot.przyciski1.klawisze=true;
+       touchp.giveOutputStream(oos);
+       // pilot.przyciski1.givePrintWriter(out);
+       // pilot.przyciski1.klawisze=true;
      //   pilot.blad.setText("asdads");
      //   myAsync.cancel();
     }

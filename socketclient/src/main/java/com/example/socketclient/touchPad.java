@@ -6,7 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,13 +17,16 @@ import java.util.TimerTask;
 public class touchPad extends Activity {
     Activity activity;
 TextView blad;
-    PrintWriter out;
+    //PrintWriter out;
+     ObjectOutputStream out;
    public boolean active = false;
-
+    public static TCP_Data data;
     public touchPad(Activity activity)
     {
         this.activity = activity;
         out = null;
+       data = new TCP_Data();
+        data.type = TCP_Data.typ.TOUCHPAD;
         blad = (TextView) this.activity.findViewById(R.id.textView1);
         blad.setText("touchpad");
 
@@ -87,6 +91,8 @@ TextView blad;
 
                 int actionMask = motionEvent.getActionMasked();
 
+
+
                 switch (actionMask)
                 {
 
@@ -113,25 +119,40 @@ TextView blad;
                                 pilot.przyciski1.click();
                             }
                         }, 1000);
+
                         break;
 
                     }
+
                     case MotionEvent.ACTION_POINTER_1_UP:
                     {
-                        prawy = true;
-                       blad.setText("prawy");
-                        longpressTimer.cancel();
 
+                        prawy = true;
+
+                        longpressTimer.cancel();
+                        data.clean();
+                        data.mouse = TCP_Data.touchedTYPE.PPM;
+                        send();
+                        blad.setText("prawy");
                         break;
                     }
                     case MotionEvent.ACTION_UP:
                     {
                         longpressTimer.cancel();
                         returnState = false;
-                        if((int) Math.sqrt(dx*dx + dy*dy)<=2 && System.currentTimeMillis()-startTime<100 && !prawy){
+                        if((int) Math.sqrt(dx*dx + dy*dy)<=1 && System.currentTimeMillis()-startTime<100 && !prawy){
 
-                            out.println("click");
+                           // out.println("click");
+                            data.clean();
+                           data.mouse = TCP_Data.touchedTYPE.LPM;
+
+                            send();
                             blad.setText("click");
+                        }
+                        else if(longClicked)
+                        {
+                            data.mouse = TCP_Data.touchedTYPE.UP;
+                            send();
                         }
                         prawy =  false;
                         break;
@@ -152,23 +173,39 @@ TextView blad;
                         if(longClicked)
                         {
                             blad.setText("long  "+String.valueOf(dx));
-
+                            data.mouse = TCP_Data.touchedTYPE.LONG;
+                            data.touchpadX = (int)dx;
+                            data.touchpadY =(int)dy;
+                            send();
 
                         }
                         else if(System.currentTimeMillis()-startTime>50)
                         {
-                            if(dx<0)
+                            blad.setText(String.valueOf(dx)+" \r"+String.valueOf(dy));
+                            if(dx<-0.5)
                             {
                                 dx-=1;
                             }
-                            else if(dx>0)
+                            else if(dx>0.5)
                             {
                                 dx+=1;
                             }
-                            out.println((int)dx);
+                            if(dy<-0.5)
+                            {
+                                dy-=1;
+                            }
+                            else if(dy>0.5)
+                            {
+                                dy+=1;
+                            }
+                          //  out.println((int)dx);
 
-                            blad.setText(String.valueOf(dx)+" \r"+String.valueOf(dy));
+                            data.mouse = TCP_Data.touchedTYPE.NORMAL;
+                            data.touchpadX = (int)dx;
+                            data.touchpadY =(int)dy;
 
+
+                            send();
                         }
                         /*?
                         a = MouseInfo.getPointerInfo();
@@ -181,7 +218,13 @@ TextView blad;
 
                         break;
                     }
+
                 }
+
+
+
+
+
                 }
 
                 mPreviousX = x;
@@ -197,8 +240,19 @@ TextView blad;
 
     }
 
-public void givePrintWriter(PrintWriter cos)
+public void giveOutputStream(ObjectOutputStream cos)
 {
     out = cos;
 }
+
+    void send()
+    {
+        try {
+            out.writeObject(data);
+out.reset();
+           // out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
