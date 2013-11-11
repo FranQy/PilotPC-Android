@@ -23,11 +23,14 @@ public class menu {
 
     ClickableSlidingDrawer sliding;
 
+
     public static Activity activity;
 
     public menu(Activity activity)
     {
         this.activity=activity;
+
+
 
         sliding = (ClickableSlidingDrawer) this.activity.findViewById(R.id.slidingDrawer);
 
@@ -55,7 +58,7 @@ public class menu {
             @Override
             public void onClick(View view) {
                 if(mContainerView.getChildCount()==0){
-                addItem();
+                addConnect();
                 }
                 else
                 {
@@ -86,7 +89,7 @@ public class menu {
 
 
 
-    private void addItem() {
+    private void addConnect() {
 
         nameView.findViewById(R.id.buttondel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,9 +101,14 @@ public class menu {
         nameView.findViewById(R.id.saveName)  .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              //  pilot Pilot = new pilot();
+                pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString());
+
+                closeMENUall();
+                close();
 //TODO: check Null pointer...
 
-                pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString());
+
             }
         });
 
@@ -136,6 +144,7 @@ public class menu {
 
         }
 
+
     }
 
     public boolean closeMENU()
@@ -166,6 +175,11 @@ public class menu {
         sliding.animateToggle();
     }
 
+    public  void close()
+    {
+        if(sliding.isOpened())
+            sliding.animateClose();
+    }
 }
 
 

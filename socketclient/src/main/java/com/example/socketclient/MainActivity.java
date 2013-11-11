@@ -2,8 +2,6 @@ package com.example.socketclient;
 
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 import android.app.Activity;
@@ -19,22 +17,23 @@ import android.os.Bundle;
 
 
 import android.util.Log;
-import android.view.GestureDetector;
+
 import android.view.KeyEvent;
 
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
+
 
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import android.widget.ViewFlipper;
 
 
@@ -49,9 +48,9 @@ public class MainActivity extends Activity implements AsyncResponse {
    // ImageView odswierz;
 
     Context kontext;
-   // TextView blad;
+    static TextView blad;
 
-  //  ImageView przyciski;
+    static ImageView PadL, PadR;
     WifiManager mainWifi;
 
    //public fileOperation nameFile;
@@ -63,6 +62,7 @@ public class MainActivity extends Activity implements AsyncResponse {
 
     pilot pilot;
    static touchPad touchp;
+
 
     menu men;
     String servername= "";
@@ -78,6 +78,7 @@ ViewFlipper vf;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.pilot_layout);
 
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 
         touchp = new touchPad(this);
@@ -107,6 +108,7 @@ ViewFlipper vf;
         gamepad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                men.close();
                 if(vf.getDisplayedChild()!=0){
                     vf.setInAnimation(inFromLeftAnimation());
                     vf.setOutAnimation(outToRightAnimation());
@@ -121,6 +123,7 @@ ViewFlipper vf;
         pilotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                men.close();
                 if(vf.getDisplayedChild()==0)
                 {
                     vf.setInAnimation(inFromRightAnimation());
@@ -139,7 +142,7 @@ ViewFlipper vf;
         keyboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                men.close();
                 if(vf.getDisplayedChild()<2)
                 {
                     vf.setInAnimation(inFromRightAnimation());
@@ -158,6 +161,7 @@ ViewFlipper vf;
         mouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                men.close();
                 if(vf.getDisplayedChild()<3)
                 {
                     vf.setInAnimation(inFromRightAnimation());
@@ -171,6 +175,13 @@ ViewFlipper vf;
         /**
          * end of menu Bar buttons listeners
          */
+
+
+
+
+
+      //  PadL.scrollTo(-30, -50);
+
 
         //FrameLayout mojanim = (FrameLayout) findViewById(R.id)
      //  Button mojanim = (Button) findViewById(R.id.buttonAim);
@@ -240,7 +251,133 @@ ViewFlipper vf;
            finish();
        }
 */
+        PadL = (ImageView) findViewById(R.id.padL);
 
+      final ImageView PadLBack = (ImageView) findViewById(R.id.PadLBack);
+        blad = (TextView) findViewById(R.id.textView1);
+
+        PadLBack.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                float x = motionEvent.getX();
+                float y = motionEvent.getY();
+                float x1, y1;
+
+
+
+
+
+
+
+
+
+                int actionMask = motionEvent.getActionMasked();
+
+                if(actionMask == MotionEvent.ACTION_MOVE)
+                {
+                    x-=90;
+                    y-=90;
+                    blad.setText(String.valueOf(y));
+                    if(Math.sqrt(x*x+y*y)>79)
+                    {
+                        y1 = (float) ((y/Math.sqrt(x*x+y*y))*85);
+                        x1 = (float) ((x/Math.sqrt(x*x+y*y))*85);
+                    }
+                    else
+                    {
+                        x1=x;
+                        y1=y;
+                    }
+                    blad.setText(String.valueOf(Math.sqrt(x1*x1+y1*y1)));
+                    PadL.setX(x1+PadLBack.getLeft());
+                    PadL.setY(y1+653+90);
+
+
+
+
+
+
+                    return true;
+                }
+                else if(actionMask == MotionEvent.ACTION_UP)
+                {
+                    PadL.setX(PadLBack.getLeft());
+                    PadL.setY(743);
+
+                    x-=90;
+                    y-=90;
+                   // blad.setText(String.valueOf(Math.sqrt(x*x+y*y)));
+                }
+                //blad.setText(String.valueOf(x-90)+"  "+String.valueOf(y-90));
+                return true;
+            }
+        });
+
+
+
+        PadR = (ImageView) findViewById(R.id.PadR);
+
+        final ImageView PadRBack = (ImageView) findViewById(R.id.PadRBack);
+
+
+        PadRBack.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                float x = motionEvent.getX();
+                float y = motionEvent.getY();
+                float x1, y1;
+
+
+
+
+
+
+
+
+
+                int actionMask = motionEvent.getActionMasked();
+
+                if(actionMask == MotionEvent.ACTION_MOVE)
+                {
+                    x-=90;
+                    y-=90;
+
+                    if(Math.sqrt(x*x+y*y)>79)
+                    {
+                        y1 = (float) ((y/Math.sqrt(x*x+y*y))*85);
+                        x1 = (float) ((x/Math.sqrt(x*x+y*y))*85);
+                    }
+                    else
+                    {
+                        x1=x;
+                        y1=y;
+                    }
+                    blad.setText(String.valueOf(Math.sqrt(x*x+y*y)));
+                    PadR.setX(x1+PadRBack.getLeft());
+                    PadR.setY(y1+653+90);
+
+
+
+
+
+
+                    return true;
+                }
+                else if(actionMask == MotionEvent.ACTION_UP)
+                {
+                    PadR.setX(PadRBack.getLeft());
+                    PadR.setY(743);
+
+                    x-=90;
+                    y-=90;
+                    // blad.setText(String.valueOf(Math.sqrt(x*x+y*y)));
+                }
+                //blad.setText(String.valueOf(x-90)+"  "+String.valueOf(y-90));
+                return true;
+            }
+        });
 
 
 
@@ -276,8 +413,9 @@ boolean costamif = false;
         touchp.active = true;
        touchp.giveOutputStream(oos);
        // pilot.przyciski1.givePrintWriter(out);
-       // pilot.przyciski1.klawisze=true;
-     //   pilot.blad.setText("asdads");
+        pilot.przyciski1.giveOutputStream(oos);
+        pilot.przyciski1.klawisze=true;
+        pilot.blad.setText("asdads");
      //   myAsync.cancel();
     }
 

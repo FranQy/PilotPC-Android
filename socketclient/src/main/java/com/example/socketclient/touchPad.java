@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -26,14 +27,16 @@ TextView blad;
         this.activity = activity;
         out = null;
        data = new TCP_Data();
-        data.type = TCP_Data.typ.TOUCHPAD;
+
         blad = (TextView) this.activity.findViewById(R.id.textView1);
         blad.setText("touchpad");
 
-        ImageView mysz = (ImageView) this.activity.findViewById(R.id.imageMysz);
+        //ImageView mysz = (ImageView) this.activity.findViewById(R.id.imageMysz);
 
+        LinearLayout touchArea = (LinearLayout) this.activity.findViewById(R.id.touchArea);
+        LinearLayout scrollArea = (LinearLayout) this.activity.findViewById(R.id.scrollArea);
 
-        mysz.setOnTouchListener(new View.OnTouchListener() {
+        touchArea.setOnTouchListener(new View.OnTouchListener() {
             float mPreviousX=0;
             float mPreviousY=0;
             float oldX =0;
@@ -118,7 +121,7 @@ TextView blad;
                                 longClicked = true;
                                 pilot.przyciski1.click();
                             }
-                        }, 1000);
+                        }, 500);
 
                         break;
 
@@ -162,7 +165,7 @@ TextView blad;
                     case MotionEvent.ACTION_MOVE:
                     {
                         int s = (int) Math.sqrt(dx*dx + dy*dy);
-                        boolean isActuallyMoving = s >= 1;
+                        boolean isActuallyMoving = s >= 2;
 
                         if(isActuallyMoving){
 
@@ -238,6 +241,126 @@ TextView blad;
 
         });
 
+
+        scrollArea.setOnTouchListener(new View.OnTouchListener() {
+
+
+            float mPreviousY=0;
+
+
+int r=0;
+            private  boolean returnState = true;
+
+
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                int pointerCount = motionEvent.getPointerCount();
+
+
+
+
+                float y = motionEvent.getY();
+
+
+                float dy = y - mPreviousY;
+
+                boolean prawy = false;
+
+
+                if(active)
+                {
+
+                    int actionMask = motionEvent.getActionMasked();
+
+
+
+                    switch (actionMask)
+                    {
+
+
+                        case MotionEvent.ACTION_DOWN:
+                        {
+                            returnState = true;
+
+
+
+
+
+
+
+
+                            break;
+
+                        }
+
+
+                        case MotionEvent.ACTION_UP:
+                        {
+
+                            returnState = false;
+
+
+                            break;
+
+
+                        }
+                        case MotionEvent.ACTION_MOVE:
+                        {
+
+
+
+
+                                if(dy<-0.5)
+                                {
+                                    dy-=1;
+                                }
+                                else if(dy>0.5)
+                                {
+                                    dy+=1;
+                                }
+                                //  out.println((int)dx);
+                            if(r==1)
+                            {
+                            blad.setText(String.valueOf(dy));
+
+                                data.mouse = TCP_Data.touchedTYPE.SCROLL;
+
+                                data.touchpadY =(int)dy;
+
+
+                                send();
+                            }
+                            else if(r==6)
+                            {
+                                r=0;
+                            }
+                            r++;
+
+
+                            break;
+                        }
+                    }
+
+                    }
+
+
+
+
+
+
+
+
+                mPreviousY = y;
+
+
+                return returnState;
+
+            }
+        });
+
+
     }
 
 public void giveOutputStream(ObjectOutputStream cos)
@@ -247,10 +370,11 @@ public void giveOutputStream(ObjectOutputStream cos)
 
     void send()
     {
+        data.type = TCP_Data.typ.TOUCHPAD;
         try {
             out.writeObject(data);
-out.reset();
-           // out.flush();
+            out.reset();
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

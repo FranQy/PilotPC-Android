@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/PadLBack"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/pad0"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="50dp" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/padL"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/pad1"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="50dp" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/PadRBack"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/pad0"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="50dp" />
 
-
-
-    <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"/>
-
-    <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar2"
-            android:layout_gravity="center"/>
-
-    <ProgressBar
-            style="?android:attr/progressBarStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar4"/>
-
-</LinearLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/PadR"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/pad1" />
+</FrameLayout>

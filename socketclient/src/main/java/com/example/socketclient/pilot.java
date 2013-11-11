@@ -30,8 +30,6 @@ public class pilot  {
 
 
        this.activity=activity;
-
-       blad = (TextView) this.activity.findViewById(R.id.textView1);
        file = new fileOperation();
        file.read();
 

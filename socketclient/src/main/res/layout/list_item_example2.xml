@@ -21,14 +21,13 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="158dp"
                     android:clickable="false"
                     android:id="@+id/relativeLayout"
                     android:layout_gravity="center_horizontal|top"
                     android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-20dp"
-                    android:background="#555555">
+        android:background="#555555">
 
         <Button
                 style="?android:attr/buttonStyleSmall"
@@ -55,8 +54,24 @@
                 android:text="potwierdz"
                 android:id="@+id/saveName"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginTop="24dp"
-                android:layout_below="@+id/servName"
-                android:layout_alignRight="@+id/servName"/>
+            android:layout_below="@+id/servName"
+            android:layout_alignRight="@+id/servName" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_above="@+id/servName"
+            android:layout_alignLeft="@+id/servName" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button Qr"
+            android:id="@+id/button2"
+            android:layout_above="@+id/servName"
+            android:layout_alignRight="@+id/servName" />
+
     </RelativeLayout>
 </LinearLayout>

@@ -53,7 +53,7 @@
         <com.example.socketclient.ClickableSlidingDrawer
                 android:id="@+id/slidingDrawer"
                 android:layout_width="fill_parent"
-                android:layout_height="400dp"
+                android:layout_height="fill_parent"
                 android:handle="@+id/handle"
                 android:content="@+id/content"
                 android:layout_gravity="bottom">
