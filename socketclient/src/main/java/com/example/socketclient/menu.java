@@ -2,13 +2,18 @@ package com.example.socketclient;
 
 import android.app.Activity;
 
+import android.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SlidingDrawer;
+import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 
 /**
@@ -23,12 +28,16 @@ public class menu {
 
     ClickableSlidingDrawer sliding;
 
+    ViewFlipper connectFlipper;
+
+
 
     public static Activity activity;
 
     public menu(Activity activity)
     {
         this.activity=activity;
+        Button nameButton = (Button) this.activity.findViewById(R.id.buttonNameChange);
 
 
 
@@ -53,7 +62,59 @@ public class menu {
         });
 
 
-       Button nameButton = (Button) this.activity.findViewById(R.id.buttonNameChange);
+
+
+
+
+
+
+
+         final String TAG = "FragmentTabs";
+         final String TAB_WORDS = "words";
+         final String TAB_NUMBERS = "numbers";
+
+
+
+        TabHost tabHost;
+
+        tabHost=(TabHost)nameView.findViewById(R.id.tabHost);
+        tabHost.setup();
+
+        TabHost.TabSpec spec1=tabHost.newTabSpec("TAB 1");
+        spec1.setContent(R.id.tab1);
+        spec1.setIndicator("Search");
+
+
+        TabHost.TabSpec spec2=tabHost.newTabSpec("TAB 2");
+        spec2.setIndicator("Write ");
+        spec2.setContent(R.id.tab2);
+
+
+        TabHost.TabSpec spec3=tabHost.newTabSpec("TAB 3");
+        spec3.setContent(R.id.tab3);
+        spec3.setIndicator("Qr ");
+
+        tabHost.addTab(spec1);
+        tabHost.addTab(spec2);
+        tabHost.addTab(spec3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         nameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +150,7 @@ public class menu {
 
 
 
+
     private void addConnect() {
 
         nameView.findViewById(R.id.buttondel).setOnClickListener(new View.OnClickListener() {
@@ -103,6 +165,9 @@ public class menu {
             public void onClick(View view) {
               //  pilot Pilot = new pilot();
                 pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString());
+
+                InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
 
                 closeMENUall();
                 close();

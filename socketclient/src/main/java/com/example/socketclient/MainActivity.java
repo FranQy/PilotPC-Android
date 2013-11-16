@@ -261,6 +261,7 @@ ViewFlipper vf;
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 float x = motionEvent.getX();
+
                 float y = motionEvent.getY();
                 float x1, y1;
 
@@ -355,8 +356,10 @@ ViewFlipper vf;
                         y1=y;
                     }
                     blad.setText(String.valueOf(Math.sqrt(x*x+y*y)));
-                    PadR.setX(x1+PadRBack.getLeft());
-                    PadR.setY(y1+653+90);
+                   // PadR.setX();
+                   // PadR.offsetLeftAndRight((int)x1+PadRBack.getLeft());
+                    PadR.layout(400, 400, 400, 400 );
+                   // PadR.setY(y1+653+90);
 
 
 
