@@ -111,8 +111,9 @@ class connecting extends AsyncTask<String, Void, Integer> {
                         oos = new ObjectOutputStream(socket.getOutputStream());
                         //Przesylanie hasla przy polaczeniu
                        Connect dat = new Connect();
-                        dat.nazwa="Android"
-                        dat.wersja="0.0.1"//wersja aplikacji, nie wiem jak chcesz numerowac
+                       dat.haslo="123456";//tu podasz to, co wpisze urzytkownik lub zczytasz z QR
+                        dat.nazwa="Android";
+                        dat.wersja="0.0.1";//wersja aplikacji, nie wiem jak chcesz numerowac
 
                        oos.writeObject(dat);
 
