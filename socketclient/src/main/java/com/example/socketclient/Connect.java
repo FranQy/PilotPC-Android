@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * 
  */
 package com.example.socketclient;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @author Mateusz
- * Klasa przesy³ana tak jak TCP_Data, ale tylko przy ³¹czeniu
+ * Klasa przesyÅ‚ana tak jak TCP_Data, ale tylko przy Å‚Ä…czeniu
  */
 public class Connect implements Serializable {
 	/**
@@ -15,20 +15,20 @@ public class Connect implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Has³o do po³¹czenia (6 cyfr)
+	 * HasÅ‚o do poÅ‚Ä…czenia (6 cyfr)
 	 */
 public String haslo;
 /**
- * Nazwa telefonu/kompa (mo¿e dzia³aæ w dwie strony)
+ * Nazwa telefonu/kompa (moÅ¼e dziaÅ‚aÄ‡ w dwie strony)
  */
 public String nazwa;
 /**
- * Wersja aplikacji/serwera (mo¿e dzia³aæ w dwie strony)
+ * Wersja aplikacji/serwera (moÅ¼e dziaÅ‚aÄ‡ w dwie strony)
  */
 public String wersja;
 
 /**
- * informuje, czy kod zosta³ przyjêty
+ * informuje, czy kod zostaÅ‚ przyjÄ™ty
  * @author Mateusz
  *
  */
