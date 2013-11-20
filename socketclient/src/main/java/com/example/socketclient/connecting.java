@@ -109,14 +109,15 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
 
                         oos = new ObjectOutputStream(socket.getOutputStream());
-                       /*TCP_Data dat = new TCP_Data();
-
-
+                        //Przesylanie hasla przy polaczeniu
+                       Connect dat = new Connect();
+                        dat.nazwa="Android"
+                        dat.wersja="0.0.1"//wersja aplikacji, nie wiem jak chcesz numerowac
 
                        oos.writeObject(dat);
 
                         oos.flush();
-                        oos.close();*/
+                        oos.close();
 
 
                        /* out = new PrintWriter(new BufferedWriter(
