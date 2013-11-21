@@ -118,7 +118,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
                        oos.writeObject(dat);
 
                         oos.flush();
-                        oos.close();
+                       // oos.close();
 
 
                        /* out = new PrintWriter(new BufferedWriter(

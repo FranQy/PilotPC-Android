@@ -141,7 +141,7 @@
       <file leaf-file-name="connecting.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/socketclient/src/main/java/com/example/socketclient/connecting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="0" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.29427084" vertical-offset="1587" max-vertical-offset="3349">
+            <state line="120" column="25" selection-start="2712" selection-end="2712" vertical-scroll-proportion="0.7369792" vertical-offset="1587" max-vertical-offset="3349">
               <folding />
             </state>
           </provider>
@@ -182,6 +182,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/socketclient/src/main/java/com/example/socketclient/Connect.java" />
+        <option value="$PROJECT_DIR$/socketclient/src/main/java/com/example/socketclient/connecting.java" />
       </list>
     </option>
   </component>
@@ -382,7 +383,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -395,7 +396,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -455,7 +456,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/socketclient/src/main/java/com/example/socketclient/connecting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="0" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.29427084" vertical-offset="1587" max-vertical-offset="3349">
+        <state line="120" column="25" selection-start="2712" selection-end="2712" vertical-scroll-proportion="0.7369792" vertical-offset="1587" max-vertical-offset="3349">
           <folding />
         </state>
       </provider>
