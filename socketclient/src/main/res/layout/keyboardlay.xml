@@ -10,7 +10,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="keyboard"
-            android:id="@+id/textView123"
+            android:id="@+id/scanText"
             android:layout_gravity="left|center_vertical"/>
 
     <Button
@@ -20,4 +20,5 @@
             android:text="New Button"
             android:id="@+id/button"
             android:layout_gravity="center"/>
+
 </LinearLayout>

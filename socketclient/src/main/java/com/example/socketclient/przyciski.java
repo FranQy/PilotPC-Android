@@ -6,6 +6,7 @@ package com.example.socketclient;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
@@ -29,21 +30,127 @@ import java.io.ObjectOutputStream;
 public class przyciski extends pilot{
   //  public Activity activity;
     boolean klawisze = false;
-    ImageView przyciskia, infoImage, hand;
+   // ImageView przyciskia, infoImage, hand;
+    ImageView onoff, mute, music, photo, movie, quieter, louder, perv, next, playpause, stop;
 
 
    // PrintWriter out;
-   ObjectOutputStream out;
+  // ObjectOutputStream out;
     static public  TCP_Data data  = new TCP_Data();
 
     public przyciski(){
 
 super();
 
-        out = null;
+       // out = null;
 
         blad = (TextView) this.activity.findViewById(R.id.textView1);
 blad.setText("asd");
+
+
+       onoff = (ImageView) this.activity.findViewById(R.id.onoff);
+       mute = (ImageView) this.activity.findViewById(R.id.mute);
+       music = (ImageView) this.activity.findViewById(R.id.music);
+       photo = (ImageView) this.activity.findViewById(R.id.photo);
+       movie = (ImageView) this.activity.findViewById(R.id.movie);
+       quieter = (ImageView) this.activity.findViewById(R.id.quieter);
+       louder = (ImageView) this.activity.findViewById(R.id.louder);
+       perv = (ImageView) this.activity.findViewById(R.id.perv);
+       next = (ImageView) this.activity.findViewById(R.id.next);
+       playpause = (ImageView) this.activity.findViewById(R.id.playpause);
+       stop = (ImageView) this.activity.findViewById(R.id.stop);
+
+
+
+        onoff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.OFF);
+            }
+        });
+
+
+        mute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.MUTE);
+            }
+        });
+
+        music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.MUSIC);
+            }
+        });
+
+        photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //click(TCP_Data.pilotButton.);
+            }
+        });
+
+        movie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.MULTIMEDIA);
+            }
+        });
+
+        quieter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.VOLDOWN);
+            }
+        });
+
+        louder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.VOLUP);
+            }
+        });
+
+        perv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.PERV);
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.NEXT);
+            }
+        });
+
+        playpause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.PLAYPAUSE);
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(TCP_Data.pilotButton.STOP);
+            }
+        });
+
+
+
+
+
+
+
+
+        /**
+         * STARA WERSJA
+         */
+        /**
         przyciskia = (ImageView) this.activity.findViewById(R.id.imagePrzyciski);
         infoImage =(ImageView) this.activity.findViewById(R.id.imageInfo);
 
@@ -249,7 +356,7 @@ void ktoryPrzycisk(int touchedRGB)
         }
         }
     }
-
+**/
 
 
 
@@ -257,22 +364,21 @@ void ktoryPrzycisk(int touchedRGB)
 
 }
 
-    public void giveOutputStream(ObjectOutputStream cos)
-    {
-        out = cos;
-    }
+
 
     void click(TCP_Data.pilotButton button)
     {
         data.type=TCP_Data.typ.PILOT;
         data.button=button;
-
-        try {
-            out.writeObject(data);
-            out.reset();
-            out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+         if(klawisze)
+         {
+             try {
+                   MainActivity.oos.writeObject(data);
+                     MainActivity.oos.reset();
+                  MainActivity.oos.flush();
+             } catch (IOException e) {
+               e.printStackTrace();
+             }
         }
         click();
     }

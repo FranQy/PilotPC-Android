@@ -21,7 +21,7 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:clickable="false"
                     android:id="@+id/relativeLayout"
                     android:layout_gravity="center_horizontal|top"
@@ -41,7 +41,7 @@
 
         <TabHost
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="350dp"
             android:id="@+id/tabHost"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -62,7 +62,80 @@
                 <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="300dp">
+
+                    <LinearLayout
+                        android:id="@+id/tab3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:measureWithLargestChild="false"
+                        android:gravity="center_vertical|center_horizontal">
+
+                        <FrameLayout
+                            android:layout_width="290dp"
+                            android:layout_height="290dp"
+                            android:id="@+id/cameraPreview">
+
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/tab2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <EditText
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/servName"
+                            android:layout_below="@+id/textView2"
+                            android:layout_alignParentLeft="true" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Połącz"
+                            android:id="@+id/saveName"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Nazwa/IP komputera"
+                            android:id="@+id/textView2"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/infoAuthorTxT" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Hasło"
+                            android:id="@+id/textView3"
+                            android:layout_below="@+id/servName"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/infoAuthorTxT"
+                            android:layout_marginBottom="5dp" />
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:ems="10"
+                            android:id="@+id/servPass"
+                            android:layout_below="@+id/textView3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignRight="@+id/saveName" />
+
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/tab1"
@@ -84,35 +157,6 @@
                             android:layout_gravity="center_vertical"
                             android:choiceMode="singleChoice" />
                     </LinearLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/tab2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <EditText
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/servName"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginTop="31dp" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New Button"
-                            android:id="@+id/saveName"
-                            android:layout_below="@+id/servName"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="33dp" />
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/tab3"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="horizontal"></LinearLayout>
                 </FrameLayout>
 
             </LinearLayout>

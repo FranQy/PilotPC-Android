@@ -60,20 +60,23 @@ class connecting extends AsyncTask<String, Void, Integer> {
         String servername = Strings[0];
         socket = new Socket();
 
-
         Log.d("async", servername);
 
         if(socket.isConnected())
         {
 
-            try {
-                socket.getOutputStream().close();
-                socket.getInputStream().close();
-                socket.close();
+
+                try {
+                    socket.setKeepAlive(false);
+                    socket.setSoTimeout(1000);
+                    socket.getOutputStream().close();
+                    socket.getInputStream().close();
+                    socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
 
 
 

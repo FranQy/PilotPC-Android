@@ -3,6 +3,7 @@ package com.example.socketclient;
 import android.app.Activity;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,19 +25,27 @@ public class menu {
 
     ViewGroup mContainerView, infoContainerView;
 
-     ViewGroup nameView, infoView;
+    public static ViewGroup nameView;
+     ViewGroup infoView;
 
     ClickableSlidingDrawer sliding;
 
     ViewFlipper connectFlipper;
 
-
+QrReader Qr;
 
     public static Activity activity;
 
-    public menu(Activity activity)
+    public menu(Activity activity, Context kontext)
     {
         this.activity=activity;
+
+
+
+
+
+
+
         Button nameButton = (Button) this.activity.findViewById(R.id.buttonNameChange);
 
 
@@ -51,6 +60,8 @@ public class menu {
 
        infoView = (ViewGroup) LayoutInflater.from(this.activity).inflate(
                 R.layout.authors, infoContainerView, false);
+
+        Qr = new QrReader(kontext, activity);
 
 
         sliding.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
@@ -198,6 +209,8 @@ public class menu {
 
     private void closeMENUall()
     {
+        Qr.releaseCamera();
+
         if(mContainerView.getChildCount()==1)
         {
             mContainerView.removeView(nameView);
@@ -214,7 +227,7 @@ public class menu {
 
     public boolean closeMENU()
     {
-
+        Qr.releaseCamera();
         if(infoContainerView.getChildCount()==1)
         {
             infoContainerView.removeView(infoView);
@@ -244,6 +257,12 @@ public class menu {
     {
         if(sliding.isOpened())
             sliding.animateClose();
+    }
+
+
+    public void polaczono()
+    {
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: połączono");
     }
 }
 

@@ -25,7 +25,7 @@
                 android:id="@+id/viewFlippermoj"
                 android:visibility="visible">
             <include android:id="@+id/libraryView1"  layout="@layout/gamepadlay" />
-            <include android:id="@+id/libraryView2"  layout="@layout/pilotlay" />
+            <include android:id="@+id/libraryView2"  layout="@layout/pilotlay2" />
             <include android:id="@+id/libraryView2"  layout="@layout/keyboardlay" />
             <include android:id="@+id/libraryView2"  layout="@layout/mouselay" />
                 </ViewFlipper>
@@ -93,7 +93,7 @@
                             android:background="#002e2e2e"
                             android:src="@drawable/gamepad"
                             android:scaleType="fitCenter"
-                            />
+                        android:clickable="true" />
 
                     <ImageButton
                             style="?android:attr/buttonStyleSmall"
@@ -104,7 +104,8 @@
                             android:background="#002e2e2e"
                             android:src="@drawable/pilot"
                             android:visibility="visible"
-                            android:scaleType="fitCenter"/>
+                            android:scaleType="fitCenter"
+                        android:clickable="true" />
 
                     <ImageButton
                             style="?android:attr/buttonStyleSmall"
@@ -114,7 +115,8 @@
                             android:layout_toRightOf="@+id/buttonPilot"
                             android:background="#002e2e2e"
                             android:src="@drawable/klawiatura"
-                            android:scaleType="fitCenter"/>
+                            android:scaleType="fitCenter"
+                        android:clickable="true" />
 
                     <ImageButton
                             style="?android:attr/buttonStyleSmall"
@@ -125,7 +127,8 @@
                             android:background="#002e2e2e"
                             android:scaleType="fitCenter"
                             android:src="@drawable/myszka"
-                            android:layout_marginRight="20dp"/>
+                            android:layout_marginRight="20dp"
+                        android:clickable="true" />
                 </LinearLayout>
 
             </RelativeLayout>

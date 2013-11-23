@@ -2,6 +2,7 @@ package com.example.socketclient;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,12 @@ public class ClickableSlidingDrawer extends SlidingDrawer {
 
                 childView.getHitRect(hitRect);
 
-               // if(childView.isClickable())
-               // {
+                if(handleClickX<mHandleLayout.getWidth()-TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics()))
+                {
                 if (hitRect.contains(handleClickX, handleClickY)) {
                     return false;
                 }
-               // }
+                }
             }
         }
 

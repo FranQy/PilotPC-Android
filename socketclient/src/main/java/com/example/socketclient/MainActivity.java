@@ -12,10 +12,12 @@ import android.content.Context;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.hardware.Camera;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 
+import android.os.Handler;
 import android.util.Log;
 
 import android.view.KeyEvent;
@@ -34,8 +36,41 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+
+
+
+
+
+
+import android.hardware.Camera;
+import android.hardware.Camera.PreviewCallback;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Parameters;
+import android.hardware.Camera.Size;
+
+
+/* Import ZBar Class files */
+import net.sourceforge.zbar.ImageScanner;
+import net.sourceforge.zbar.Image;
+import net.sourceforge.zbar.Symbol;
+import net.sourceforge.zbar.SymbolSet;
+import net.sourceforge.zbar.Config;
+
+
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.FrameLayout;
+import android.widget.Button;
 
 @SuppressWarnings("ALL")
 public class MainActivity extends Activity implements AsyncResponse {
@@ -46,28 +81,32 @@ public class MainActivity extends Activity implements AsyncResponse {
    // Thread mojThread;
     //Thread pilotThread, pilotThread1;
    // ImageView odswierz;
-
-    Context kontext;
+ public static ObjectOutputStream oos;
+    static Context kontext;
     static TextView blad;
 
     static ImageView PadL, PadR;
     WifiManager mainWifi;
 
+ static TextView stanPolaczenia;
+
    //public fileOperation nameFile;
 
 
 
-    AlertDialog alertDialog;
+    //AlertDialog alertDialog;
  //   InetSocketAddress asddd;
 
     pilot pilot;
    static touchPad touchp;
 
 
-    menu men;
+   static menu men;
     String servername= "";
 
 ViewFlipper vf;
+
+
 
 
 
@@ -80,9 +119,14 @@ ViewFlipper vf;
 
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        kontext = getApplicationContext();
+
+
+
 
         touchp = new touchPad(this);
-        men = new menu(this);
+        men = new menu(this, getApplicationContext());
+
         /**
          * viewFlipper construct and show pilotlay.xml
          */
@@ -175,6 +219,25 @@ ViewFlipper vf;
         /**
          * end of menu Bar buttons listeners
          */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -410,15 +473,18 @@ boolean costamif = false;
 //        touch.givePrintWriter(out);
 
 //boolean so = touchp.active;
-        ObjectOutputStream oos;
+
         oos = output;
         touchp.blad.setText("tou");
         touchp.active = true;
        touchp.giveOutputStream(oos);
        // pilot.przyciski1.givePrintWriter(out);
-        pilot.przyciski1.giveOutputStream(oos);
+       // pilot.przyciski1.giveOutputStream(oos);
         pilot.przyciski1.klawisze=true;
         pilot.blad.setText("asdads");
+        Toast.makeText(kontext, "połączono", 2000).show();
+       // stanPolaczenia.setText("-Stan:  połączono");
+men.polaczono();
      //   myAsync.cancel();
     }
 
@@ -452,16 +518,22 @@ switch (output)
 
 
 }
+
 //klawisze=false;
 touchp.active = false;
         pilot.przyciski1.klawisze=false;
 
-        //out = null;
+        oos = null;
 
 
         Log.d("async", "end2");
     }
 
+
+    void foo()
+    {
+        stanPolaczenia.setText("-Stan:  rozłączonyaaa");
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -740,7 +812,6 @@ public class sendcos
         b.println("asdasdasd");
     }
 }
-
 
 
 
