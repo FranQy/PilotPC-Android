@@ -1,6 +1,9 @@
 package com.example.socketclient;
 
+import java.io.InputStream;
+import java.io.ObjectInput;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 
 /**
@@ -10,5 +13,5 @@ import java.io.ObjectOutputStream;
  */
 public interface AsyncResponse {
     void processFinish(int output);
-    void processFinish(ObjectOutputStream output);
+    void processFinish(ObjectOutputStream output, OutputStream os, InputStream is);
 }

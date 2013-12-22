@@ -4,14 +4,19 @@ import android.app.Activity;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SlidingDrawer;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -23,23 +28,25 @@ import android.widget.ViewFlipper;
  */
 public class menu {
 
-    ViewGroup mContainerView, infoContainerView;
+    ViewGroup mContainerView, infoContainerView, wyswietlanieContainerView;
 
     public static ViewGroup nameView;
-     ViewGroup infoView;
+     static ViewGroup infoView, wyswietlanieView;
+
+    Spinner wyswietlanieCzasSpinner, wyswietlanieTypSpinner;
 
     ClickableSlidingDrawer sliding;
 
     ViewFlipper connectFlipper;
 
-QrReader Qr;
+ static QrReader Qr;
 
     public static Activity activity;
-
+    public static Context kontext;
     public menu(Activity activity, Context kontext)
     {
         this.activity=activity;
-
+        this.kontext=kontext;
 
 
 
@@ -54,12 +61,16 @@ QrReader Qr;
 
         mContainerView = (ViewGroup) this.activity.findViewById(R.id.container2);
         infoContainerView = (ViewGroup) this.activity.findViewById(R.id.infoContainer);
+        wyswietlanieContainerView = (ViewGroup) this.activity.findViewById(R.id.wyswietlanieContainer);
 
          nameView = (ViewGroup) LayoutInflater.from(this.activity).inflate(
                 R.layout.list_item_example2, mContainerView, false);
 
        infoView = (ViewGroup) LayoutInflater.from(this.activity).inflate(
                 R.layout.authors, infoContainerView, false);
+
+
+        wyswietlanieView = (ViewGroup) LayoutInflater.from(this.activity).inflate(R.layout.wyswietlanie, wyswietlanieContainerView, false);
 
         Qr = new QrReader(kontext, activity);
 
@@ -78,11 +89,93 @@ QrReader Qr;
 
 
 
+        wyswietlanieCzasSpinner = (Spinner) wyswietlanieView.findViewById(R.id.wyswietlanieCzasSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapterWyswietlanieCzas = ArrayAdapter.createFromResource(this.activity,
+                R.array.wyswietlanieArrayCzas, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapterWyswietlanieCzas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        wyswietlanieCzasSpinner.setAdapter(adapterWyswietlanieCzas);
+        wyswietlanieCzasSpinner.setEnabled(false);
 
 
-         final String TAG = "FragmentTabs";
-         final String TAB_WORDS = "words";
-         final String TAB_NUMBERS = "numbers";
+        wyswietlanieTypSpinner = (Spinner) wyswietlanieView.findViewById(R.id.wyswietlanieTypSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapterWyswietlanieTyp = ArrayAdapter.createFromResource(this.activity,
+                R.array.wyswietlanieArrayTyp, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapterWyswietlanieTyp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+
+        wyswietlanieTypSpinner.setAdapter(adapterWyswietlanieTyp);
+        wyswietlanieTypSpinner.setSelection(1);
+
+
+
+
+      wyswietlanieCzasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+          @Override
+          public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+              MainActivity.blad.setText(String.valueOf(i));
+
+
+
+
+          }
+
+          @Override
+          public void onNothingSelected(AdapterView<?> adapterView) {
+
+          }
+      });
+
+
+        wyswietlanieTypSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                if(MainActivity.wl.isHeld())
+                     MainActivity.wl.release();
+
+                switch(i)
+                {
+                    case 0:
+                    {
+
+                      //  MainActivity.wl.release();
+                        MainActivity.screenManager = false;
+                        MainActivity.blad.setText("normall");
+                        break;
+                    }
+                    case 1:
+                    {
+                       // MainActivity.wl.release();
+                        MainActivity.screenManager = true;
+                        MainActivity.wl = MainActivity.pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "wygas ekran");
+                        MainActivity.wl.acquire();
+                        MainActivity.blad.setText("dim");
+                        break;
+                    }
+                    case 2:
+                    {
+
+                        MainActivity.screenManager = true;
+                        MainActivity.wl = MainActivity.pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "full wake lock");
+                        MainActivity.wl.acquire(MainActivity.wlTimeout);
+                        MainActivity.blad.setText("always on");
+                        break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
 
@@ -140,6 +233,21 @@ QrReader Qr;
         });
 
 
+        Button wyswietlanieButton = (Button) this.activity.findViewById(R.id.buttonWyswietlanie);
+        wyswietlanieButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(wyswietlanieContainerView.getChildCount()==0){
+                    addWyswietlanie();
+                }
+                else
+                {
+                    wyswietlanieContainerView.removeView(wyswietlanieView);
+                }
+            }
+        });
+
+
        Button infoButton = (Button) this.activity.findViewById(R.id.buttonInfo);
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +276,9 @@ QrReader Qr;
             @Override
             public void onClick(View view) {
               mContainerView.removeView(nameView);
+               /* if(Qr!=null)
+                Qr.releaseCamera();
+                Qr=null;*/
             }
         });
 
@@ -188,8 +299,29 @@ QrReader Qr;
             }
         });
 
+
+       // Qr.ad();
+        Qr.getIn();
         mContainerView.addView(nameView, 0);
 
+
+
+
+
+    }
+
+    private void addWyswietlanie()
+    {
+
+
+        wyswietlanieView.findViewById(R.id.closeWyswietlanie).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wyswietlanieContainerView.removeView(wyswietlanieView);
+            }
+        });
+
+        wyswietlanieContainerView.addView(wyswietlanieView, 0);
 
     }
 
@@ -207,9 +339,12 @@ QrReader Qr;
 
     }
 
-    private void closeMENUall()
+    public void closeMENUall()
     {
         Qr.releaseCamera();
+       /* if(Qr!=null)
+        Qr.releaseCamera();
+        Qr=null;*/
 
         if(mContainerView.getChildCount()==1)
         {
@@ -228,6 +363,9 @@ QrReader Qr;
     public boolean closeMENU()
     {
         Qr.releaseCamera();
+       /* if(Qr!=null)
+        Qr.releaseCamera();
+        Qr=null;*/
         if(infoContainerView.getChildCount()==1)
         {
             infoContainerView.removeView(infoView);
@@ -260,9 +398,15 @@ QrReader Qr;
     }
 
 
-    public void polaczono()
+   static public void polaczono(String Host)
     {
         ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: połączono");
+        ((TextView)infoView.findViewById(R.id.hostTxt)).setText("-Host: "+Host);
+    }
+
+    public menu()
+    {
+
     }
 }
 

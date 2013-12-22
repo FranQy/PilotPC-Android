@@ -76,7 +76,8 @@
                         <FrameLayout
                             android:layout_width="290dp"
                             android:layout_height="290dp"
-                            android:id="@+id/cameraPreview">
+                            android:id="@+id/cameraPreview"
+                            android:background="#4fff2a">
 
                         </FrameLayout>
                     </LinearLayout>

@@ -8,6 +8,7 @@ package com.example.socketclient;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Button;
 
@@ -37,14 +39,14 @@ import net.sourceforge.zbar.Config;
 public class QrReader {
 
 
-    private Camera mCamera;
-    private CameraPreview mPreview;
-    private Handler autoFocusHandler;
+    private  static Camera mCamera;
+    private static  CameraPreview mPreview;
+    private  Handler autoFocusHandler;
 
    // TextView scanText;
     Button scanButton;
 
-    ImageScanner scanner;
+     ImageScanner scanner;
 
     private boolean barcodeScanned = false;
     private boolean previewing = true;
@@ -64,19 +66,16 @@ public class QrReader {
 
 
 
+
         autoFocusHandler = new Handler();
-        mCamera = getCameraInstance();
+       // mCamera = getCameraInstance();
 
         /* Instance barcode scanner */
         scanner = new ImageScanner();
         scanner.setConfig(0, Config.X_DENSITY, 3);
         scanner.setConfig(0, Config.Y_DENSITY, 3);
 
-        mPreview = new CameraPreview(this.kontext, mCamera, previewCb, autoFocusCB);
 
-
-        FrameLayout preview = (FrameLayout) menu.nameView.findViewById(R.id.cameraPreview);
-        preview.addView(mPreview);
 
         //scanText = (TextView)findViewById(R.id.scanText);
 
@@ -108,14 +107,55 @@ public class QrReader {
         return c;
     }
 
-    public void releaseCamera() {
-        if (mCamera != null) {
-            previewing = false;
-            mCamera.setPreviewCallback(null);
-            mCamera.release();
-            mCamera = null;
+
+    public void getIn()
+    {
+
+        try {
+            if(mCamera==null){
+
+                //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                autoFocusHandler = new Handler();
+                mCamera = getCameraInstance();
+
+
+                scanner = new ImageScanner();
+                scanner.setConfig(0, Config.X_DENSITY, 3);
+                scanner.setConfig(0, Config.Y_DENSITY, 3);
+
+                mPreview = new CameraPreview(this.activity, mCamera, previewCb, autoFocusCB);
+                FrameLayout preview = (FrameLayout) menu.nameView.findViewById(R.id.cameraPreview);
+                preview.addView(mPreview);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+
         }
     }
+    public void ad()
+    {
+        mCamera = getCameraInstance();
+
+        mPreview = new CameraPreview(this.kontext, mCamera, previewCb, autoFocusCB);
+    }
+
+    public void releaseCamera() {
+        if (mCamera != null) {
+            mPreview.setVisibility(View.INVISIBLE);
+            previewing = false;
+            mCamera.setPreviewCallback(null);
+            mPreview.getHolder().removeCallback(mPreview);
+            mCamera.release();
+            mCamera = null;
+            mPreview= null;
+        }
+        FrameLayout preview = (FrameLayout) menu.nameView.findViewById(R.id.cameraPreview);
+
+        preview.removeView(mPreview);
+
+    }
+
+
 
     private Runnable doAutoFocus = new Runnable() {
         public void run() {
@@ -135,15 +175,36 @@ public class QrReader {
             int result = scanner.scanImage(barcode);
 
             if (result != 0) {
+                String[] ip = new String[5];
                 previewing = false;
                 mCamera.setPreviewCallback(null);
                 mCamera.stopPreview();
 
                 SymbolSet syms = scanner.getResults();
                 for (Symbol sym : syms) {
+
+                     ip = sym.getData().split("\\/");
+
                    // scanText.setText("barcode result " + sym.getData());
                     barcodeScanned = true;
                 }
+
+                if(ip.length>3)
+                {
+                pilot.file.write(ip[2]+":"+ip[3]);
+               // MainActivity.men.closeMENUall();
+               // MainActivity.men.close();
+                MainActivity.blad.setText(Build.MANUFACTURER+" "+Build.MODEL);
+
+                }
+                else
+                {
+                    MainActivity.men.closeMENUall();
+                    MainActivity.men.close();
+                    MainActivity.blad.setText("zły kod");
+
+                }
+
             }
         }
     };

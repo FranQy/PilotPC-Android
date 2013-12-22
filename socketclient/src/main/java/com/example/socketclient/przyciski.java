@@ -45,7 +45,7 @@ super();
        // out = null;
 
         blad = (TextView) this.activity.findViewById(R.id.textView1);
-blad.setText("asd");
+//blad.setText("asd");
 
 
        onoff = (ImageView) this.activity.findViewById(R.id.onoff);

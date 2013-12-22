@@ -2,11 +2,15 @@ package com.example.socketclient;
 
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -30,7 +34,9 @@ class connecting extends AsyncTask<String, Void, Integer> {
     InetSocketAddress SocketAdrr;
     PrintWriter out;
     ObjectOutputStream oos;
-    private static final int SERVERPORT = 12345;
+    OutputStream os;
+    InputStream is;
+    private static final int SERVERPORT = 8753;
 
 
     void closeSocket()
@@ -57,7 +63,10 @@ class connecting extends AsyncTask<String, Void, Integer> {
     protected Integer doInBackground(String... Strings) {
         int error = 0;
 
-        String servername = Strings[0];
+        String servername = Strings[0].split(":")[0];
+
+
+
         socket = new Socket();
 
         Log.d("async", servername);
@@ -111,7 +120,34 @@ class connecting extends AsyncTask<String, Void, Integer> {
                          */
 
 
+
                         oos = new ObjectOutputStream(socket.getOutputStream());
+
+
+
+
+                        Connect firstSend = new Connect();
+
+                        if(Strings[0].length()>1)
+                       firstSend.haslo = Strings[0].split(":")[2];
+
+                       firstSend.nazwa = Build.MANUFACTURER+" "+Build.MODEL;
+                        oos.writeObject(firstSend);
+                        oos.reset();
+                        oos.flush();
+
+
+                        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+
+                        try {
+                            firstSend = (Connect) ois.readObject();
+                            menu.polaczono(firstSend.nazwa);
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+
+
                        /*TCP_Data dat = new TCP_Data();
 
 
@@ -182,7 +218,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
     protected void onPostExecute(Integer result) {
         if(result==0)
         {
-            delegate.processFinish(oos);
+            delegate.processFinish(oos, os, is);
             Log.d("async", "ok, connected, send PrintWriter");
         }
         else

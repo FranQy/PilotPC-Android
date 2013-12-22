@@ -240,6 +240,27 @@
                                 android:animateLayoutChanges="true"/>
 
                         <Button
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="wyświetlanie"
+                            android:id="@+id/buttonWyswietlanie"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="#2e2e2e"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:textSize="25dp"
+                            android:textColor="@color/infoAuthorTxT" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:id="@+id/wyswietlanieContainer"
+                            android:animateLayoutChanges="true"/>
+
+                        <Button
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:text="informacje"

@@ -34,6 +34,22 @@
             android:id="@+id/stanPolaczenia"
             android:textColor="@color/infoAuthorTxT" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="-Jakość: b/d"
+            android:id="@+id/jakoscTxt"
+            android:textColor="@color/infoAuthorTxT" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="-Host: b/d"
+            android:id="@+id/hostTxt"
+            android:textColor="@color/infoAuthorTxT" />
+
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="2px"

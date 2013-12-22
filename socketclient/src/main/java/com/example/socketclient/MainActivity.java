@@ -1,9 +1,13 @@
 package com.example.socketclient;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 
@@ -18,6 +22,8 @@ import android.os.Bundle;
 
 
 import android.os.Handler;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.util.Log;
 
 import android.view.KeyEvent;
@@ -83,7 +89,7 @@ public class MainActivity extends Activity implements AsyncResponse {
    // ImageView odswierz;
  public static ObjectOutputStream oos;
     static Context kontext;
-    static TextView blad;
+   public static TextView blad;
 
     static ImageView PadL, PadR;
     WifiManager mainWifi;
@@ -106,9 +112,10 @@ public class MainActivity extends Activity implements AsyncResponse {
 
 ViewFlipper vf;
 
-
-
-
+  public  static  PowerManager pm;
+   public static PowerManager.WakeLock wl;
+  public static boolean screenManager = true;
+   public static long wlTimeout = 60000;
 
 
     @Override
@@ -117,7 +124,19 @@ ViewFlipper vf;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.pilot_layout);
 
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+       // this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+
+        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
+         wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+
+
+       // wl.acquire();
+        //screen will stay on during this section...
+       // wl.release();
+
 
         kontext = getApplicationContext();
 
@@ -458,7 +477,7 @@ boolean costamif = false;
 
 
 
-    public void processFinish( ObjectOutputStream  output){
+    public void processFinish( ObjectOutputStream  output, OutputStream os, InputStream is){
         //this you will received result fired from async class of onPostExecute(result) method.
       //  PrintWriter out;
       //  blad.setText("połączono");
@@ -475,17 +494,21 @@ boolean costamif = false;
 //boolean so = touchp.active;
 
         oos = output;
-        touchp.blad.setText("tou");
+       // touchp.blad.setText("tou");
         touchp.active = true;
        touchp.giveOutputStream(oos);
        // pilot.przyciski1.givePrintWriter(out);
        // pilot.przyciski1.giveOutputStream(oos);
         pilot.przyciski1.klawisze=true;
-        pilot.blad.setText("asdads");
+       // pilot.blad.setText("asdads");
         Toast.makeText(kontext, "połączono", 2000).show();
        // stanPolaczenia.setText("-Stan:  połączono");
-men.polaczono();
-     //   myAsync.cancel();
+
+
+
+
+
+        //   myAsync.cancel();
     }
 
 
@@ -549,37 +572,7 @@ touchp.active = false;
     }
 
 
-  /*  @Override
-    public boolean onTouchEvent(MotionEvent touchevent) {
-        switch (touchevent.getAction())
-        {
-            case MotionEvent.ACTION_DOWN:
-            {
-                oldTouchValue = touchevent.getX();
-                break;
-            }
-            case MotionEvent.ACTION_UP:
-            {
-                //if(this.searchOk==false) return false;
-                float currentX = touchevent.getX();
-                if (oldTouchValue < currentX)
-                {
-                    vf.setInAnimation(inFromLeftAnimation());
-                    vf.setOutAnimation(outToRightAnimation());
-                    vf.showNext();
-                }
-                if (oldTouchValue > currentX)
-                {
-                    vf.setInAnimation(inFromRightAnimation());
-                    vf.setOutAnimation(outToLeftAnimation());
-                    vf.showPrevious();
 
-                }
-                break;
-            }
-        }
-        return false;
-    }*/
 
     /**
      * viewFlipper's animations
@@ -720,31 +713,26 @@ touchp.active = false;
         }
 
     }
+*/
+
+
+
+
 
     public void onPause()
     {
-        super.onPause();
-        if(socket!=null)
-        {
-        try {
-
-            socket.getOutputStream().close();
-            socket.getInputStream().close();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-            socket = null;
-
-
+          super.onPause();
+         if(wl.isHeld())
+             wl.release();
 
 
         }
 
 
-    }
-*/
-  @Override
+
+
+
+ // @Override
     public void onBackPressed()
     {
 
@@ -757,9 +745,7 @@ pilot.file.rozlacz();
             finish();
         }
 
-       // pilot.file.rozlacz();
-       // finish();
-      //myAsync.closeSocket();
+
 
 
 
@@ -774,6 +760,24 @@ pilot.file.rozlacz();
         }
         return super.onKeyUp(keyCode, event);
     }
+
+
+    public void onStop() {
+        super.onStop();
+
+
+    }
+
+    public void onResume()
+    {
+
+        super.onResume();
+        if(screenManager)
+            wl.acquire(wlTimeout);
+
+   }
+
+
 
 
 
@@ -798,20 +802,6 @@ pilot.file.rozlacz();
 
 
 
-public class sendcos
-{
-    PrintWriter b;
-    public sendcos(PrintWriter a)
-    {
-        b = a;
-        b.println("asaas");
-    }
-
-    public void senda()
-    {
-        b.println("asdasdasd");
-    }
-}
 
 
 

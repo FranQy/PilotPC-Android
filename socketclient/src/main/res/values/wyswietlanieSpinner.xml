@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="wyswietlanieArrayCzas">
+        <item>systemowe</item>
+        <item>30min</item>
+        <item>10min</item>
+        <item>5min</item>
+        <item>3min</item>
+        <item>1min</item>
+        <item>30s</item>
+        <item>10s</item>
+    </string-array>
+
+    <string-array name="wyswietlanieArrayTyp">
+        <item>normalnie</item>
+        <item>wygaś ekran</item>
+        <item>zawsze włączony</item>
+    </string-array>
+</resources>
