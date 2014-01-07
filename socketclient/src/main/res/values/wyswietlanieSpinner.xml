@@ -12,7 +12,7 @@
     </string-array>
 
     <string-array name="wyswietlanieArrayTyp">
-        <item>normalnie</item>
+        <item>wyłącz ekran</item>
         <item>wygaś ekran</item>
         <item>zawsze włączony</item>
     </string-array>

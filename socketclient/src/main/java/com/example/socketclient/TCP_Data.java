@@ -8,18 +8,20 @@ import java.io.Serializable;
 public class TCP_Data implements Serializable {
 
 
-public enum typ{GAMEPAD, PILOT, KEYBOARD, TOUCHPAD};
-  public enum  pilotButton{OFF, MUSIC, MULTIMEDIA, PLAYPAUSE, PERV, NEXT, STOP, EXIT, BACK, VOLDOWN, VOLUP, MUTE,
-    UP, DOWN, RIGHT, LEFT, RETTURN};
+    public enum typ{GAMEPAD, PILOT, KEYBOARD, TOUCHPAD};
+    public enum  pilotButton{OFF, MUSIC, MULTIMEDIA, PLAYPAUSE, PERV, NEXT, STOP, EXIT, BACK, VOLDOWN, VOLUP, MUTE,
+        UP, DOWN, RIGHT, LEFT, RETTURN,
+        REWIND,//Przewijanie do tyłu
+        FORWARD};//przewijanie do przodu
 
-  public enum touchedTYPE {NORMAL, LONG, UP, SCROLL, LPM, PPM};
+    public enum touchedTYPE {NORMAL, LONG, UP, SCROLL, LPM, PPM};
 
     public int touchpadX;
     public int touchpadY;
     public typ type;
     public pilotButton button;
     public touchedTYPE mouse;
-
+    public int key;//kalwiatura
     public void clean()
     {
         touchpadX = 0;

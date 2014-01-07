@@ -133,7 +133,7 @@ ViewFlipper vf;
          wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
 
 
-       // wl.acquire();
+        wl.acquire();
         //screen will stay on during this section...
        // wl.release();
 
@@ -764,8 +764,7 @@ pilot.file.rozlacz();
 
     public void onStop() {
         super.onStop();
-
-
+        pilot.file.rozlacz();
     }
 
     public void onResume()
@@ -775,7 +774,7 @@ pilot.file.rozlacz();
         if(screenManager)
             wl.acquire(wlTimeout);
 
-   }
+    }
 
 
 

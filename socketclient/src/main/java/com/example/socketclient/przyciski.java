@@ -30,7 +30,7 @@ import java.io.ObjectOutputStream;
 public class przyciski extends pilot{
   //  public Activity activity;
     boolean klawisze = false;
-   // ImageView przyciskia, infoImage, hand;
+    ImageView przyciskia, infoImage, hand;
     ImageView onoff, mute, music, photo, movie, quieter, louder, perv, next, playpause, stop;
 
 
@@ -45,132 +45,8 @@ super();
        // out = null;
 
         blad = (TextView) this.activity.findViewById(R.id.textView1);
-//blad.setText("asd");
 
-
-       onoff = (ImageView) this.activity.findViewById(R.id.onoff);
-       mute = (ImageView) this.activity.findViewById(R.id.mute);
-       music = (ImageView) this.activity.findViewById(R.id.music);
-       photo = (ImageView) this.activity.findViewById(R.id.photo);
-       movie = (ImageView) this.activity.findViewById(R.id.movie);
-       quieter = (ImageView) this.activity.findViewById(R.id.quieter);
-       louder = (ImageView) this.activity.findViewById(R.id.louder);
-       perv = (ImageView) this.activity.findViewById(R.id.perv);
-       next = (ImageView) this.activity.findViewById(R.id.next);
-       playpause = (ImageView) this.activity.findViewById(R.id.playpause);
-       stop = (ImageView) this.activity.findViewById(R.id.stop);
-
-
-
-        onoff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.OFF);
-            }
-        });
-
-
-        mute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.MUTE);
-            }
-        });
-
-        music.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.MUSIC);
-            }
-        });
-
-        photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //click(TCP_Data.pilotButton.);
-            }
-        });
-
-        movie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.MULTIMEDIA);
-            }
-        });
-
-        quieter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.VOLDOWN);
-            }
-        });
-
-        louder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.VOLUP);
-            }
-        });
-
-        perv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.PERV);
-            }
-        });
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.NEXT);
-            }
-        });
-
-        playpause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.PLAYPAUSE);
-            }
-        });
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(TCP_Data.pilotButton.STOP);
-            }
-        });
-
-
-
-
-
-
-
-
-        /**
-         * STARA WERSJA
-         */
-        /**
-        przyciskia = (ImageView) this.activity.findViewById(R.id.imagePrzyciski);
-        infoImage =(ImageView) this.activity.findViewById(R.id.imageInfo);
-
-       // connectingSlidingMenu = (SlidingDrawer) this.activity.findViewById(R.id.slidingDrawer2);
-      // PilotButton = (ImageView) this.activity.findViewById(R.id.pilotButton);
-
-        hand = (ImageView)this.activity.findViewById(R.id.handleImag);
-//testLay = (LinearLayout) this.activity.findViewById(R.id.linearLayout4);
-
-
-
-        infoImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                    infoImage.setVisibility(View.INVISIBLE);
-                click();
-
-            }
-        });
+przyciskia = (ImageView)this.activity.findViewById(R.id.przyciskiBack);
 
         przyciskia.setOnTouchListener(new View.OnTouchListener() {
 
@@ -203,7 +79,7 @@ super();
                   // blad.setText(String.valueOf(x));
 
 
-                if(x>0 && x<500)
+                //if(x>0 && x<500)
                 ktoryPrzycisk(bitmap.getPixel(x, y));
 
 
@@ -218,151 +94,92 @@ super();
 
 void ktoryPrzycisk(int touchedRGB)
 {
-
-    if(touchedRGB == -14149877)
-    {
-        blad.setText("menu masz na dole");
-       // click();
-
-
-
-    }
-    else if(touchedRGB == -32640)
-    {
-       click();
-        infoImage.setVisibility(View.VISIBLE);
-    }
-
+blad.setText(String.valueOf(touchedRGB));
     if (klawisze) {
 
     switch (touchedRGB) {
-        case -39424: {
-            //click("radio");
-            break;
-        }
-        case -256: {
+
+        case -7024087: {
             click(TCP_Data.pilotButton.VOLUP);
             break;
         }
-        case -16733697: {
+        case -7023945: {
             click(TCP_Data.pilotButton.VOLDOWN);
             break;
         }
-        case -5636268: {
+        case -15404256: {
             click(TCP_Data.pilotButton.MUTE);
+
             break;
         }
-        case -13312: {
+        case -789740: {
             //click("p/p");
             click(TCP_Data.pilotButton.PLAYPAUSE);
             break;
         }
-        case -11189248: {
+        case -798025: {
             click(TCP_Data.pilotButton.PERV);
             break;
         }
-        case -6528: {
+        case -821484: {
             click(TCP_Data.pilotButton.NEXT);
             break;
         }
-        case -65536: {
+        case -846828: {
             click(TCP_Data.pilotButton.OFF);
             break;
         }
-        case -13142: {
-            //click("tv");
-            break;
-        }
-        case -32982: {
-            //click("movie");
-            break;
-        }
-        case -11522794: {
-           // click("rec");
-            break;
-        }
-        case -2912929: {
+
+        case -15404070: {
             //click("stop");
             click(TCP_Data.pilotButton.STOP);
             break;
         }
-        case -16744448: {
-            //click("red");
-            break;
-        }
-        case -65281: {
-            //click("green");
-            break;
-        }
-        case -11206656: {
-            //click("yellow");
-            break;
-        }
-        case -2883584: {
-           // click("blue");
-            break;
-        }
-        case -43691: {
-           // click("DVR");
-            break;
-        }
-
-        case -21846: {
-          //  click("info");
 
 
-            break;
-        }
-        case -5467245: {
-            click(TCP_Data.pilotButton.EXIT);
-            break;
-        }
-        case -58368: {
-            //click("ch+");
-            break;
-        }
-        case -11206743: {
-            //click("ch-");
-            break;
-        }
-        case -51200: {
-            //back
-            break;
-        }
-        case -16711681: {
+
+
+        case -15443725: {
            // click("OK");
             click(TCP_Data.pilotButton.RETTURN);
             break;
         }
-        case -1900772: {
+        case -16734011: {
             click(TCP_Data.pilotButton.UP);
             break;
         }
-        case -16777089: {
+        case -2381627: {
             click(TCP_Data.pilotButton.DOWN);
             break;
         }
-        case -16744449: {
+        case -16777019: {
             click(TCP_Data.pilotButton.RIGHT);
             break;
         }
-        case -16776961: {
+        case -16777216: {
             click(TCP_Data.pilotButton.LEFT);
             break;
         }
-
+        case -846617: {
+            click(TCP_Data.pilotButton.MULTIMEDIA);
+            break;
+        }
+        case -846735:{
+            click(TCP_Data.pilotButton.MUSIC);
+            break;
+        }
         default: {
             break;
         }
         }
     }
-**/
-
-
-
-
-
 }
+
+
+
+
+
+
 
 
 

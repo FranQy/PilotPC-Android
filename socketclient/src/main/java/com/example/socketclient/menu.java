@@ -356,6 +356,11 @@ public class menu {
             infoContainerView.removeView(infoView);
 
         }
+        if(infoContainerView.getChildCount()==1)
+        {
+            infoContainerView.removeView(wyswietlanieView);
+
+        }
 
 
     }
@@ -368,7 +373,13 @@ public class menu {
         Qr=null;*/
         if(infoContainerView.getChildCount()==1)
         {
+
             infoContainerView.removeView(infoView);
+            return true;
+        }
+        else if(wyswietlanieContainerView.getChildCount()==1)
+        {
+             wyswietlanieContainerView.removeView(wyswietlanieView);
             return true;
         }
         else if(mContainerView.getChildCount()==1)
@@ -376,6 +387,7 @@ public class menu {
             mContainerView.removeView(nameView);
             return true;
         }
+
         else if(sliding.isOpened())
         {
             sliding.animateClose();

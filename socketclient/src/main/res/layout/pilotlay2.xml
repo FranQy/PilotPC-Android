@@ -12,7 +12,8 @@
         android:id="@+id/onoff"
         android:src="@drawable/onoff"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -20,7 +21,8 @@
         android:id="@+id/mute"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/wycisz" />
+        android:src="@drawable/wycisz"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -28,7 +30,8 @@
         android:id="@+id/playpause"
         android:src="@drawable/playpause"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/photo" />
+        android:layout_toLeftOf="@+id/photo"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -36,7 +39,8 @@
         android:id="@+id/stop"
         android:src="@drawable/stop"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/photo" />
+        android:layout_toRightOf="@+id/photo"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="220dp"
@@ -44,7 +48,8 @@
         android:id="@+id/dpad"
         android:src="@drawable/dpad_v2"
         android:layout_above="@+id/playpause"
-        android:layout_toRightOf="@+id/perv" />
+        android:layout_toRightOf="@+id/perv"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -52,7 +57,8 @@
         android:id="@+id/perv"
         android:src="@drawable/cofnij"
         android:layout_above="@+id/playpause"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -60,7 +66,8 @@
         android:id="@+id/next"
         android:src="@drawable/dalej"
         android:layout_above="@+id/stop"
-        android:layout_alignLeft="@+id/mute" />
+        android:layout_alignLeft="@+id/mute"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -68,7 +75,8 @@
         android:id="@+id/quieter"
         android:src="@drawable/ciszej"
         android:layout_alignTop="@+id/dpad"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -76,7 +84,8 @@
         android:id="@+id/louder"
         android:src="@drawable/glosniej"
         android:layout_alignTop="@+id/dpad"
-        android:layout_toRightOf="@+id/dpad" />
+        android:layout_toRightOf="@+id/dpad"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -85,7 +94,8 @@
         android:layout_below="@+id/mute"
         android:layout_centerHorizontal="true"
         android:src="@drawable/zdjecia"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -95,7 +105,8 @@
         android:layout_below="@+id/onoff"
         android:layout_toLeftOf="@+id/photo"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -105,6 +116,26 @@
         android:layout_below="@+id/mute"
         android:layout_toRightOf="@+id/photo"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/przyciskiBack"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pilotback"
+        android:visibility="visible"
+        android:alpha="0" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/przyciski"
+        android:src="@drawable/pilotlayout"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible" />
 
 </RelativeLayout>

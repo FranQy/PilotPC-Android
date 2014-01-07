@@ -93,7 +93,8 @@
                             android:background="#002e2e2e"
                             android:src="@drawable/gamepad"
                             android:scaleType="fitCenter"
-                        android:clickable="true" />
+                        android:clickable="true"
+                        android:visibility="gone" />
 
                     <ImageButton
                             style="?android:attr/buttonStyleSmall"
