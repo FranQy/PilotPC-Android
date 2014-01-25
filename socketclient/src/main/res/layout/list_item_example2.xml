@@ -64,28 +64,13 @@
                     android:layout_width="fill_parent"
                     android:layout_height="300dp">
 
-                    <LinearLayout
-                        android:id="@+id/tab3"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center_horizontal"
-                        android:measureWithLargestChild="false"
-                        android:gravity="center_vertical|center_horizontal">
-
-                        <FrameLayout
-                            android:layout_width="290dp"
-                            android:layout_height="290dp"
-                            android:id="@+id/cameraPreview"
-                            android:background="#4fff2a">
-
-                        </FrameLayout>
-                    </LinearLayout>
-
                     <RelativeLayout
                         android:id="@+id/tab2"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp">
 
                         <EditText
                             android:layout_width="fill_parent"
@@ -137,6 +122,24 @@
                             android:layout_alignRight="@+id/saveName" />
 
                     </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tab3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:measureWithLargestChild="false"
+                        android:gravity="center_vertical|center_horizontal">
+
+                        <FrameLayout
+                            android:layout_width="290dp"
+                            android:layout_height="290dp"
+                            android:id="@+id/cameraPreview"
+                            android:background="#4fff2a">
+
+                        </FrameLayout>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/tab1"

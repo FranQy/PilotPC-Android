@@ -5,15 +5,21 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.hardware.Camera;
@@ -38,8 +44,10 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.widget.Toast;
@@ -87,6 +95,7 @@ public class MainActivity extends Activity implements AsyncResponse {
    // Thread mojThread;
     //Thread pilotThread, pilotThread1;
    // ImageView odswierz;
+   static boolean polaczony = false;
  public static ObjectOutputStream oos;
     static Context kontext;
    public static TextView blad;
@@ -110,6 +119,15 @@ public class MainActivity extends Activity implements AsyncResponse {
    static menu men;
     String servername= "";
 
+    Socket sock;
+
+    /*
+    Notifications
+     */
+    static Notification.Builder builder;
+    static NotificationManager manager;
+
+
 ViewFlipper vf;
 
   public  static  PowerManager pm;
@@ -125,6 +143,48 @@ ViewFlipper vf;
         setContentView(R.layout.pilot_layout);
 
        // this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+/**
+ * Notification build
+ */
+        builder = new Notification.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("GodFinger")
+                        .setContentText("Połączony")
+                        .setPriority(1)
+                        .setOngoing(true);
+
+
+         Intent backIntent = new Intent(this, MainActivity.class);
+    backIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+      Intent intent = new Intent(this, MainActivity.class);
+    intent.setAction(Intent.ACTION_MAIN);
+    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+            intent, 0);
+    builder.setContentIntent(pendingIntent);
+
+
+       /* Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);*/
+
+        // Add as notification
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+     //   manager.notify(1, builder.build());
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,15 +262,24 @@ ViewFlipper vf;
             }
         });
 
+
+
+
+
         keyboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 men.close();
                 if(vf.getDisplayedChild()<2)
                 {
+
+
+
+
                     vf.setInAnimation(inFromRightAnimation());
                     vf.setOutAnimation(outToLeftAnimation());
                     vf.setDisplayedChild(2);
+
                 }
 
                 else if(vf.getDisplayedChild()>2){
@@ -477,11 +546,44 @@ boolean costamif = false;
 
 
 
-    public void processFinish( ObjectOutputStream  output, OutputStream os, InputStream is){
+    public void processFinish( ObjectOutputStream  output, OutputStream os, InputStream is, final Socket sock){
         //this you will received result fired from async class of onPostExecute(result) method.
-      //  PrintWriter out;
+
+       this.sock = sock;
+
+
+        /**
+         *
+         * Tu masz ten ping
+         *
+         */
+        try {
+            os = sock.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        byte[] buffo = new byte[11];
+        for(int i = 0; i<11; i++)
+        {
+         buffo[i]=11;
+        }
+
+        try {
+            os.write(buffo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+        //  PrintWriter out;
       //  blad.setText("połączono");
         Log.d("async", "polaczono");
+        polaczony=true;
        // out = null;
        // out = output;
 
@@ -504,7 +606,41 @@ boolean costamif = false;
         Toast.makeText(kontext, "połączono", 2000).show();
        // stanPolaczenia.setText("-Stan:  połączono");
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true)
+                {
 
+                    try {
+                        if(sock.getInputStream().read() == -1)
+                        {
+
+
+                            Log.d("async", "rozlaczono");
+                            polaczony=false;
+                            pilot.przyciski1.klawisze=false;
+                            touchp.active = false;
+                            men.rozlaczono();
+
+                          //  Toast.makeText(kontext, "rozłączono", 2000).show();
+                            break;
+
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }).start();
 
 
 
@@ -517,21 +653,23 @@ boolean costamif = false;
     public void processFinish(int output){
         //this you will received result fired from async class of onPostExecute(result) method.
 
+        polaczony=false;
+        blad.setText("rozlaczony");
 switch (output)
 {
     case 1:
     {
-       // blad.setText("blad polaczenia");
+        blad.setText("blad polaczenia");
         break;
     }
     case 2:
     {
-      //  blad.setText("wlacz program-server");
+        blad.setText("wlacz program-server");
         break;
     }
     case 3:
     {
-       // blad.setText("wlacz PC");
+        blad.setText("wlacz PC");
 
 
 
@@ -726,30 +864,75 @@ touchp.active = false;
              wl.release();
 
 
+
         }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        manager.cancel(1);
+    }
 
+    protected void onStop() {
+        super.onStop();
 
-
- // @Override
-    public void onBackPressed()
-    {
-
-        //super.onBackPressed();
-
-
-        if(!men.closeMENU())
+        if(polaczony==true)
         {
-pilot.file.rozlacz();
-            finish();
+        manager.notify(1, builder.build());
         }
-
-
 
 
 
     }
+
+
+     @Override
+    public void onBackPressed()
+    {
+
+        //super.onBackPressed();
+        if(polaczony)
+        {
+        Toast.makeText(kontext, "przytrzymaj dluzej aby zakończyć", 2000).show();
+        this.moveTaskToBack(true);
+        }
+        else
+        {
+
+            if(!men.closeMENU())
+            {
+                pilot.file.rozlacz();
+                finish();
+            }
+        }
+
+    }
+
+
+
+        @Override
+        public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+
+
+
+            if(!men.closeMENU())
+            {
+                pilot.file.rozlacz();
+                finish();
+            }
+            // do your stuff here
+            return true;
+        }
+        return super.onKeyLongPress(keyCode, event);
+    }
+
+
+
+
+
 
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -762,10 +945,16 @@ pilot.file.rozlacz();
     }
 
 
-    public void onStop() {
-        super.onStop();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+
+        manager.cancel(1);
         pilot.file.rozlacz();
     }
+
 
     public void onResume()
     {

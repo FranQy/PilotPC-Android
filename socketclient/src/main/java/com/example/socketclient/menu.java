@@ -75,6 +75,10 @@ public class menu {
         Qr = new QrReader(kontext, activity);
 
 
+
+
+
+
         sliding.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
             @Override
             public void onDrawerClosed() {
@@ -412,8 +416,13 @@ public class menu {
 
    static public void polaczono(String Host)
     {
-        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: połączono");
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: połączony");
         ((TextView)infoView.findViewById(R.id.hostTxt)).setText("-Host: "+Host);
+    }
+
+    static public void rozlaczono()
+    {
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: rozłączony");
     }
 
     public menu()

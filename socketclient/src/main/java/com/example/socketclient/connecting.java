@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -32,6 +33,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
     InetSocketAddress SocketAdrr;
     PrintWriter out;
     ObjectOutputStream oos;
+    ObjectInputStream ois;
     OutputStream os;
     InputStream is;
     private static final int SERVERPORT = 8753;
@@ -109,7 +111,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
             }
 
 
-
+                if(socket!=null)
                 if(socket.isConnected())
                 {
                     try {
@@ -135,7 +137,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
                         oos.flush();
 
 
-                        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                       ois = new ObjectInputStream(socket.getInputStream());
 
                         try {
                             firstSend = (Connect) ois.readObject();
@@ -146,11 +148,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
 
 
-                       /*TCP_Data dat = new TCP_Data();
-
-
-
-                       oos.writeObject(dat);
+                       /*oos.writeObject(dat);
 
                         oos.flush();
                         oos.close();*/
@@ -159,6 +157,8 @@ class connecting extends AsyncTask<String, Void, Integer> {
                        /* out = new PrintWriter(new BufferedWriter(
                                 new OutputStreamWriter(socket.getOutputStream())),
                                 true);*/
+
+
 
 
 
@@ -216,7 +216,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
     protected void onPostExecute(Integer result) {
         if(result==0)
         {
-            delegate.processFinish(oos, os, is);
+            delegate.processFinish(oos, os, is, socket);
             Log.d("async", "ok, connected, send PrintWriter");
         }
         else

@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 
+import android.telephony.SignalStrength;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -21,6 +22,8 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -29,14 +32,19 @@ import java.io.ObjectOutputStream;
  */
 public class przyciski extends pilot{
   //  public Activity activity;
+  static Timer longpressTimer;
     boolean klawisze = false;
-    ImageView przyciskia, infoImage, hand;
-    ImageView onoff, mute, music, photo, movie, quieter, louder, perv, next, playpause, stop;
+    ImageView przyciskia, przyciskiFront;
+    //ImageView onoff, mute, music, photo, movie, quieter, louder, perv, next, playpause, stop;
+//long mDownTime, mOldDownTime;
 
-
+    boolean volume = false;
    // PrintWriter out;
   // ObjectOutputStream out;
     static public  TCP_Data data  = new TCP_Data();
+    static boolean returnstate=false;
+    static boolean  longClick = false;
+    long time;
 
     public przyciski(){
 
@@ -47,11 +55,16 @@ super();
         blad = (TextView) this.activity.findViewById(R.id.textView1);
 
 przyciskia = (ImageView)this.activity.findViewById(R.id.przyciskiBack);
+przyciskiFront = (ImageView) this.activity.findViewById(R.id.przyciski);
+
+
 
         przyciskia.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+
+
 
                 float X, Y;
                 X = motionEvent.getX();
@@ -67,12 +80,12 @@ przyciskia = (ImageView)this.activity.findViewById(R.id.przyciskiBack);
 
                 invertMatrix.mapPoints(XY);
 
-                int x = (int) XY[0];
-                int y = (int) XY[1];
+                final int x = (int) XY[0];
+                final int y = (int) XY[1];
 
                 Drawable imgDrawable = przyciskia.getDrawable();
                 assert imgDrawable != null;
-                Bitmap bitmap = ((BitmapDrawable)  imgDrawable).getBitmap();
+                final Bitmap bitmap = ((BitmapDrawable)  imgDrawable).getBitmap();
 
 
 
@@ -80,21 +93,108 @@ przyciskia = (ImageView)this.activity.findViewById(R.id.przyciskiBack);
 
 
                 //if(x>0 && x<500)
-                ktoryPrzycisk(bitmap.getPixel(x, y));
+
+
+                int actionMask = motionEvent.getActionMasked();
 
 
 
-                return false;
+                switch (actionMask)
+                {
+                  case MotionEvent.ACTION_DOWN:
+                    {
+                        final int touchedRGB = bitmap.getPixel(x, y);
+
+
+                        time = System.currentTimeMillis();
+                        returnstate = true;
+                        longpressTimer = new Timer();
+
+                        if(touchedRGB==-7024087 || touchedRGB == -7023945)
+                        {
+                            ktoryPrzycisk(touchedRGB);
+                            volume = true;
+                        }
+
+                        longpressTimer.schedule(new TimerTask(){
+                            @Override
+                            public void run() {
+                                longClick = true;
+                                if(touchedRGB==-7024087 || touchedRGB == -7023945)
+                                {
+
+
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        while(returnstate)
+                                        {
+
+                                            if( System.currentTimeMillis()-time>=100)
+                                            {
+
+                                                time = System.currentTimeMillis();
+
+                                                ktoryPrzycisk(touchedRGB);
+
+                                            }
+
+                                        }
+
+                                    }
+                                }).start();
+                                }
+                                else
+                                {
+                                    switch(touchedRGB)
+                                    {
+                                        case -798025: {
+                                            click(TCP_Data.pilotButton.FORWARD);
+                                            break;
+                                        }
+                                        case -821484: {
+                                            click(TCP_Data.pilotButton.REWIND);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }, 500);
+
+                       break;
+
+                    }
+                    case MotionEvent.ACTION_UP:
+                    {
+                        if(!longClick && !volume)
+                        ktoryPrzycisk(bitmap.getPixel(x, y));
+                        longClick=false;
+                        volume = false;
+                        returnstate=false;
+                        longpressTimer.cancel();
+                        blad.setText("up");
+                        time = 0;
+                        break;
+                    }
+                }
+
+
+
+                return returnstate;
             }
 
 
         });
 
+
+
+
     }
 
 void ktoryPrzycisk(int touchedRGB)
 {
-blad.setText(String.valueOf(touchedRGB));
+
     if (klawisze) {
 
     switch (touchedRGB) {

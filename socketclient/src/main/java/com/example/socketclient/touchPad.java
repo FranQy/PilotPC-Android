@@ -24,7 +24,7 @@ TextView blad;
    public boolean active = false;
     public static TCP_Data data;
 
-
+boolean wysylaj = true;
 
     public touchPad(Activity activity)
     {
@@ -217,8 +217,16 @@ TextView blad;
                                 data.touchpadX = (int)dx;
                                 data.touchpadY =(int)dy;
 
+                                if(wysylaj)
+                                {
 
-                                send();
+                                    send();
+                                    wysylaj = false;
+                                }
+                                else
+                                {
+                                    wysylaj = true;
+                                }
                             }
                             /*?
                         a = MouseInfo.getPointerInfo();
