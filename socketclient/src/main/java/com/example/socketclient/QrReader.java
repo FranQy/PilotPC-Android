@@ -114,18 +114,38 @@ public class QrReader {
         try {
             if(mCamera==null){
 
+
                 //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                autoFocusHandler = new Handler();
-                mCamera = getCameraInstance();
 
 
-                scanner = new ImageScanner();
-                scanner.setConfig(0, Config.X_DENSITY, 3);
-                scanner.setConfig(0, Config.Y_DENSITY, 3);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.runOnUiThread(new Runnable() {
+                            public void run() {
+                                autoFocusHandler = new Handler();
+                            }
+                        });
+                        mCamera = getCameraInstance();
 
-                mPreview = new CameraPreview(this.activity, mCamera, previewCb, autoFocusCB);
-                FrameLayout preview = (FrameLayout) menu.nameView.findViewById(R.id.cameraPreview);
-                preview.addView(mPreview);
+
+                        scanner = new ImageScanner();
+                        scanner.setConfig(0, Config.X_DENSITY, 3);
+                        scanner.setConfig(0, Config.Y_DENSITY, 3);
+
+                        activity.runOnUiThread(new Runnable() {
+                            public void run() {
+                                mPreview = new CameraPreview(activity, mCamera, previewCb, autoFocusCB);
+                                FrameLayout preview = (FrameLayout) menu.nameView.findViewById(R.id.cameraPreview);
+                                preview.addView(mPreview);
+                            }
+                        });
+
+
+                    }
+                }).start();
+
+
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -192,8 +212,8 @@ public class QrReader {
                 if(ip.length>3)
                 {
                 pilot.file.write(ip[2]+":"+ip[3]);
-               // MainActivity.men.closeMENUall();
-               // MainActivity.men.close();
+                MainActivity.men.closeMENUall();
+                MainActivity.men.close();
                 MainActivity.blad.setText(Build.MANUFACTURER+" "+Build.MODEL);
 
                 }

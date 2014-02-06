@@ -18,7 +18,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/imageView"
             android:layout_gravity="center"
-            android:src="@drawable/hgfh2"/>
+            android:src="@drawable/pilot"/>
 
     <ImageView
             android:layout_width="fill_parent"

@@ -26,13 +26,27 @@
             android:id="@+id/textView7"
             android:textColor="@color/infoAuthorTxT" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="-Stan:  rozłączony"
-            android:id="@+id/stanPolaczenia"
-            android:textColor="@color/infoAuthorTxT" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="-Stan:  "
+                android:id="@+id/textView8"
+                android:textColor="@color/infoAuthorTxT" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="rozłączony"
+                android:id="@+id/stanPolaczenia"
+                android:textColor="#ff0015" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

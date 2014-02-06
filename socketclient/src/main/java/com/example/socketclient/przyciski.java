@@ -98,12 +98,15 @@ przyciskiFront = (ImageView) this.activity.findViewById(R.id.przyciski);
                 int actionMask = motionEvent.getActionMasked();
 
 
-
+                if(y<bitmap.getHeight() && y>=0 && klawisze)
+                {
                 switch (actionMask)
                 {
                   case MotionEvent.ACTION_DOWN:
                     {
+
                         final int touchedRGB = bitmap.getPixel(x, y);
+
 
 
                         time = System.currentTimeMillis();
@@ -177,6 +180,7 @@ przyciskiFront = (ImageView) this.activity.findViewById(R.id.przyciski);
                         time = 0;
                         break;
                     }
+                }
                 }
 
 

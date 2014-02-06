@@ -64,6 +64,41 @@
                     android:layout_width="fill_parent"
                     android:layout_height="300dp">
 
+                    <LinearLayout
+                        android:id="@+id/tab1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center"
+                            android:rowCount="3"
+                            android:columnCount="3">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="248dp"
+                                android:id="@+id/imageView"
+                                android:src="@drawable/uc"
+                                android:layout_row="0"
+                                android:layout_column="1"
+                                android:layout_alignParentLeft="false"
+                                android:layout_alignParentStart="false"
+                                android:layout_alignParentTop="true" />
+
+                        </RelativeLayout>
+
+                        <ListView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/listView"
+                            android:layout_gravity="center_vertical"
+                            android:choiceMode="singleChoice" />
+
+                    </LinearLayout>
+
                     <RelativeLayout
                         android:id="@+id/tab2"
                         android:layout_width="fill_parent"
@@ -77,15 +112,9 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/servName"
                             android:layout_below="@+id/textView2"
-                            android:layout_alignParentLeft="true" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Połącz"
-                            android:id="@+id/saveName"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentRight="true" />
+                            android:layout_alignParentLeft="true"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -103,7 +132,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Hasło"
+                            android:text="Kod"
                             android:id="@+id/textView3"
                             android:layout_below="@+id/servName"
                             android:layout_alignParentLeft="true"
@@ -114,12 +143,21 @@
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:inputType="textPassword"
                             android:ems="10"
                             android:id="@+id/servPass"
                             android:layout_below="@+id/textView3"
                             android:layout_alignParentLeft="true"
-                            android:layout_alignRight="@+id/saveName" />
+                            android:layout_alignRight="@+id/saveName"
+                            android:imeOptions="actionDone"
+                            android:inputType="numberPassword" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Połącz"
+                            android:id="@+id/saveName"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true" />
 
                     </RelativeLayout>
 
@@ -136,31 +174,12 @@
                             android:layout_width="290dp"
                             android:layout_height="290dp"
                             android:id="@+id/cameraPreview"
-                            android:background="#4fff2a">
+                            android:background="#555555"
+                            android:layout_marginBottom="10dp">
 
                         </FrameLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/tab1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="w budowie"
-                            android:id="@+id/textView" />
-
-                        <ListView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/listView"
-                            android:layout_gravity="center_vertical"
-                            android:choiceMode="singleChoice" />
-                    </LinearLayout>
                 </FrameLayout>
 
             </LinearLayout>

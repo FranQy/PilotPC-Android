@@ -88,13 +88,13 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
 
 
-
+        Log.d("async", "dalej");
 
 
 
 
         SocketAdrr = new InetSocketAddress(servername, SERVERPORT);
-
+        Log.d("async", "dalej2");
         if(!SocketAdrr.isUnresolved())
         {
             socket = new Socket();
@@ -103,7 +103,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
 
                 socket.connect(SocketAdrr, 1000);
-
+                Log.d("async", "dalej3");
             } catch (UnknownHostException e1) {
                 // e1.printStackTrace();
             } catch (IOException e1) {
@@ -114,12 +114,25 @@ class connecting extends AsyncTask<String, Void, Integer> {
                 if(socket!=null)
                 if(socket.isConnected())
                 {
+
+
                     try {
-                        /**
+                        os = socket.getOutputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+
+
+                   /* try {
+                        *//**
                          * sending class (later)
-                         */
+                         *//*
 
-
+                        Log.d("async", "dalej4");
 
                         oos = new ObjectOutputStream(socket.getOutputStream());
 
@@ -136,7 +149,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
                         oos.reset();
                         oos.flush();
 
-
+                        Log.d("async", "dalej5");
                        ois = new ObjectInputStream(socket.getInputStream());
 
                         try {
@@ -148,15 +161,15 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
 
 
-                       /*oos.writeObject(dat);
+                       *//*oos.writeObject(dat);
 
                         oos.flush();
-                        oos.close();*/
+                        oos.close();*//*
 
 
-                       /* out = new PrintWriter(new BufferedWriter(
+                       *//* out = new PrintWriter(new BufferedWriter(
                                 new OutputStreamWriter(socket.getOutputStream())),
-                                true);*/
+                                true);*//*
 
 
 
@@ -164,7 +177,7 @@ class connecting extends AsyncTask<String, Void, Integer> {
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
 
                   /* if(out.checkError())

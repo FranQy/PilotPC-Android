@@ -4,12 +4,15 @@ import android.app.Activity;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,7 +46,7 @@ public class menu {
 
     public static Activity activity;
     public static Context kontext;
-    public menu(Activity activity, Context kontext)
+    public menu(final Activity activity, Context kontext)
     {
         this.activity=activity;
         this.kontext=kontext;
@@ -151,6 +154,7 @@ public class menu {
                       //  MainActivity.wl.release();
                         MainActivity.screenManager = false;
                         MainActivity.blad.setText("normall");
+                        activity.findViewById(R.id.mainLay).setBackgroundColor(Color.parseColor("#27201b"));
                         break;
                     }
                     case 1:
@@ -160,6 +164,7 @@ public class menu {
                         MainActivity.wl = MainActivity.pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "wygas ekran");
                         MainActivity.wl.acquire();
                         MainActivity.blad.setText("dim");
+                        activity.findViewById(R.id.mainLay).setBackgroundColor(Color.parseColor("#e3dd21"));
                         break;
                     }
                     case 2:
@@ -188,9 +193,14 @@ public class menu {
         tabHost=(TabHost)nameView.findViewById(R.id.tabHost);
         tabHost.setup();
 
+
+
         TabHost.TabSpec spec1=tabHost.newTabSpec("TAB 1");
+
         spec1.setContent(R.id.tab1);
         spec1.setIndicator("Search");
+
+
 
 
         TabHost.TabSpec spec2=tabHost.newTabSpec("TAB 2");
@@ -205,7 +215,7 @@ public class menu {
         tabHost.addTab(spec1);
         tabHost.addTab(spec2);
         tabHost.addTab(spec3);
-
+        tabHost.setCurrentTab(1);
 
 
 
@@ -227,7 +237,10 @@ public class menu {
             @Override
             public void onClick(View view) {
                 if(mContainerView.getChildCount()==0){
-                addConnect();
+
+                           addConnect();
+
+
                 }
                 else
                 {
@@ -286,11 +299,30 @@ public class menu {
             }
         });
 
+       final EditText servPass = (EditText) nameView.findViewById(R.id.servPass);
+
+        servPass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+               // if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString() + ":8753:" + servPass.getText().toString());
+
+                    InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+
+                    closeMENUall();
+                    close();
+              //  }
+                return false;
+            }
+        });
+
+
         nameView.findViewById(R.id.saveName)  .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               //  pilot Pilot = new pilot();
-                pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString());
+                pilot.file.write(((EditText) nameView.findViewById(R.id.servName)).getText().toString() + ":8753:" + servPass.getText().toString());
 
                 InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
@@ -305,6 +337,7 @@ public class menu {
 
 
        // Qr.ad();
+
         Qr.getIn();
         mContainerView.addView(nameView, 0);
 
@@ -416,13 +449,16 @@ public class menu {
 
    static public void polaczono(String Host)
     {
-        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: połączony");
-        ((TextView)infoView.findViewById(R.id.hostTxt)).setText("-Host: "+Host);
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("połączony");
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setTextColor(Color.GREEN);
+
+        ((TextView)infoView.findViewById(R.id.hostTxt)).setText("-Host: " + Host);
     }
 
     static public void rozlaczono()
     {
-        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("-Stan: rozłączony");
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setText("rozłączony");
+        ((TextView)infoView.findViewById(R.id.stanPolaczenia)).setTextColor(Color.RED);
     }
 
     public menu()

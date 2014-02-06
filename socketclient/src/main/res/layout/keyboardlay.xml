@@ -7,20 +7,98 @@
     android:id="@+id/KeyboardLayout">
 
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="keyboard"
-            android:id="@+id/scanText"
-            android:layout_gravity="left|center_vertical"/>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <Button
-            style="?android:attr/buttonStyleSmall"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
+            android:text="1"
             android:id="@+id/button"
-            android:layout_gravity="center"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="227dp"
+            android:layout_marginLeft="30dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:id="@+id/button2"
+            android:layout_alignBottom="@+id/button"
+            android:layout_toRightOf="@+id/button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:id="@+id/button3"
+            android:layout_alignTop="@+id/button2"
+            android:layout_toRightOf="@+id/button2" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:id="@+id/button4"
+            android:layout_alignBottom="@+id/button3"
+            android:layout_toRightOf="@+id/button3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/button5"
+            android:layout_alignTop="@+id/button4"
+            android:layout_toRightOf="@+id/button4" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:id="@+id/button6"
+            android:layout_alignTop="@+id/button5"
+            android:layout_toRightOf="@+id/button5" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:id="@+id/button7"
+            android:layout_alignTop="@+id/button6"
+            android:layout_toRightOf="@+id/button6" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:id="@+id/button8"
+            android:layout_alignBottom="@+id/button7"
+            android:layout_toRightOf="@+id/button7" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9"
+            android:id="@+id/button9"
+            android:layout_alignBottom="@+id/button8"
+            android:layout_toRightOf="@+id/button8" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/button10"
+            android:layout_alignTop="@+id/button9"
+            android:layout_toRightOf="@+id/button9" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="q"
+            android:id="@+id/button11"
+            android:layout_below="@+id/button2"
+            android:layout_toLeftOf="@+id/button2" />
+    </RelativeLayout>
 </LinearLayout>

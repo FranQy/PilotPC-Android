@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -150,9 +151,8 @@ ViewFlipper vf;
  */
         builder = new Notification.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("GodFinger")
+                        .setContentTitle("PCRemote")
                         .setContentText("Połączony")
-                        .setPriority(1)
                         .setOngoing(true);
 
 
@@ -545,6 +545,20 @@ ViewFlipper vf;
 boolean costamif = false;
 
 
+void showToast (final String toast, final int time)
+{
+
+
+    runOnUiThread(new Runnable() {
+        public void run()
+        {
+            Toast.makeText(kontext, toast, time).show();
+            men.rozlaczono();
+        }
+    });
+}
+
+
 
     public void processFinish( ObjectOutputStream  output, OutputStream os, InputStream is, final Socket sock){
         //this you will received result fired from async class of onPostExecute(result) method.
@@ -552,12 +566,12 @@ boolean costamif = false;
        this.sock = sock;
 
 
-        /**
+       /**
          *
          * Tu masz ten ping
          *
          */
-        try {
+       /* try {
             os = sock.getOutputStream();
         } catch (IOException e) {
             e.printStackTrace();
@@ -574,11 +588,12 @@ boolean costamif = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
+*/
 
 
 
 
-
+/*
 
         //  PrintWriter out;
       //  blad.setText("połączono");
@@ -606,14 +621,27 @@ boolean costamif = false;
         Toast.makeText(kontext, "połączono", 2000).show();
        // stanPolaczenia.setText("-Stan:  połączono");
 
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true)
+                boolean run = true;
+
+
+                InputStream test = null;
+                try {
+                    test = sock.getInputStream();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                while(run)
                 {
 
                     try {
-                        if(sock.getInputStream().read() == -1)
+                        if( test.read() == -1)
                         {
 
 
@@ -621,19 +649,27 @@ boolean costamif = false;
                             polaczony=false;
                             pilot.przyciski1.klawisze=false;
                             touchp.active = false;
-                            men.rozlaczono();
 
-                          //  Toast.makeText(kontext, "rozłączono", 2000).show();
+
+                          showToast("rozłączono", 2000);
+                            run = false;
                             break;
+
+
+
+
+
 
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
+                        run = false;
+                        break;
                     }
 
 
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -642,10 +678,30 @@ boolean costamif = false;
             }
         }).start();
 
+*/
 
-
+        touchp.active = true;
+        touchp.giveOutputStream(os);
         //   myAsync.cancel();
+
+      /*  try {
+            os.write(4);
+            os.write(4);
+            os.write(100);
+            os.write(400);
+            os.write(0);
+            os.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+
     }
+
+
 
 
 
@@ -691,23 +747,8 @@ touchp.active = false;
     }
 
 
-    void foo()
-    {
-        stanPolaczenia.setText("-Stan:  rozłączonyaaa");
-    }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        pilot.blad.setText("landscape");
-        // Checks the orientation of the screen
 
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-          pilot.blad.setText("landscape");
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            pilot.blad.setText("portrait");
-        }
-    }
 
 
 
@@ -880,6 +921,7 @@ touchp.active = false;
         if(polaczony==true)
         {
         manager.notify(1, builder.build());
+
         }
 
 
@@ -892,6 +934,7 @@ touchp.active = false;
     {
 
         //super.onBackPressed();
+        System.gc();
         if(polaczony)
         {
         Toast.makeText(kontext, "przytrzymaj dluzej aby zakończyć", 2000).show();

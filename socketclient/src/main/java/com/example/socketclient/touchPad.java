@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +22,7 @@ public class touchPad extends Activity {
 TextView blad;
     //PrintWriter out;
      ObjectOutputStream out;
+    OutputStream os;
    public boolean active = false;
     public static TCP_Data data;
 
@@ -219,8 +221,23 @@ boolean wysylaj = true;
 
                                 if(wysylaj)
                                 {
+                                    int i = 0;
 
-                                    send();
+                                    try {
+                                        setInt(os, 4);
+                                        setInt(os, 4);
+                                        setInt(os, (int)dx);
+                                        setInt(os, (int)dy);
+                                        setInt(os, 0);
+
+
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                    //send();
                                     wysylaj = false;
                                 }
                                 else
@@ -348,7 +365,10 @@ int r=0;
                                 data.touchpadY =(int)dy;
 
 
-                                send();
+                               // send();
+
+
+
                             }
                             else if(r==6)
                             {
@@ -384,6 +404,29 @@ int r=0;
     public void giveOutputStream(ObjectOutputStream cos)
     {
         out = cos;
+    }
+
+    public void giveOutputStream(OutputStream cos)
+    {
+        os = cos;
+    }
+
+    static void setInt(OutputStream os, int l) throws IOException {
+        if(l>0)
+        {
+            os.write((l/16777216)%128);
+            os.write((l/65536)%256);
+            os.write((l/256)%256);
+            os.write(l%256);
+        }
+        else
+        {
+            l=-l;
+            os.write((l/16777216)%128+128);
+            os.write((l/65536)%256);
+            os.write((l/256)%256);
+            os.write(l%256);
+        }
     }
 
     void send()
