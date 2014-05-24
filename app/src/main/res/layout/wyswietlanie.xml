@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#555555">
+
+    <RelativeLayout
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:rowCount="5"
+        android:columnCount="3">
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_screensaver_off"
+                android:id="@+id/radioWylaczEkran"
+                android:checked="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/infoAuthorTxT" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_screensaver_dim"
+                android:id="@+id/radioWygasPodswietlenie"
+                android:checked="false"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/infoAuthorTxT" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_screensaver_on"
+                android:id="@+id/radioPozostawWlaczonyEkran"
+                android:checked="false"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/infoAuthorTxT" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/closeWyswietlanie"
+            android:background="@drawable/ic_list_remove"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#555555"
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+
+    <EditText
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/dialogKod"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="anuluj"
+            android:id="@+id/dialogKodAnuluj"
+            android:layout_marginRight="80dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ok"
+            android:id="@+id/dialogKodOk" />
+    </LinearLayout>
+</LinearLayout>
